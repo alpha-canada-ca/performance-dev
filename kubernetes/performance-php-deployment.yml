@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   labels:
     tier: php
-  name: performance-php
+  name: performance-dev-php
   namespace: performance
 spec:
   progressDeadlineSeconds: 600
@@ -23,7 +23,7 @@ spec:
         tier: php
     spec:
       containers:
-      - image: tbsacr.azurecr.io/performance_php:latest
+      - image: tbsacr.azurecr.io/performance-dev_php:latest
         imagePullPolicy: Always
         livenessProbe:
           exec:
@@ -33,7 +33,7 @@ spec:
           periodSeconds: 5
           successThreshold: 1
           timeoutSeconds: 1
-        name: performance-php
+        name: performance-dev-php
         ports:
         - containerPort: 9000
           name: tcp-php-fpm

@@ -3,7 +3,7 @@ kind: Service
 metadata:
   labels:
     tier: php
-  name: performance-php
+  name: performance-dev-php
 spec:
   ports:
   - port: 9000

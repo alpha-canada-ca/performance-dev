@@ -4,7 +4,7 @@ metadata:
   annotations:
     deployment.kubernetes.io/revision: "3"
   generation: 1
-  name: performance-nginx
+  name: performance-dev-nginx
   namespace: performance
 spec:
   progressDeadlineSeconds: 600
@@ -24,7 +24,7 @@ spec:
         tier: frontend
     spec:
       containers:
-      - image: tbsacr.azurecr.io/performance_nginx:latest
+      - image: tbsacr.azurecr.io/performance-dev_nginx:latest
         imagePullPolicy: Always
         livenessProbe:
           failureThreshold: 3
@@ -76,6 +76,6 @@ spec:
       volumes:
       - configMap:
           defaultMode: 420
-          name: performance-nginx
+          name: performance-dev-nginx
         name: cm-nginx
   

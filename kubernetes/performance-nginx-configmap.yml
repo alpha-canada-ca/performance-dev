@@ -83,6 +83,6 @@ data:
     }
 kind: ConfigMap
 metadata:
-  name: performance-nginx
+  name: performance-dev-nginx
   
   

@@ -22,7 +22,7 @@ spec:
       paths:
       - backend:
           service:
-            name: performance-nginx
+            name: performance-dev-nginx
             port:
               number: 80
         path: /

@@ -3,7 +3,7 @@ kind: Service
 metadata:
   labels:
     tier: frontend
-  name: performance-nginx
+  name: performance-dev-nginx
   namespace: performance
 spec:
   ports:

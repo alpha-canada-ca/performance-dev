@@ -1,23 +1,23 @@
 version: "3"
 services:
   nginx:
-    image: "tbsacr.azurecr.io/performance_nginx:latest"
+    image: "tbsacr.azurecr.io/performance-dev_nginx:latest"
     build:
       context: ../
-      dockerfile: docker/performance_nginx/Dockerfile
+      dockerfile: docker/performance-dev_nginx/Dockerfile
     ports:
       - "8282:80"
     depends_on:
       - web
     restart: always
-    container_name: performance_nginx
+    container_name: performance-dev_nginx
     volumes:
       - /Users/ryanhyma/performance:/var/www/html
   web:
-    image: "tbsacr.azurecr.io/performance_debug_php:latest"
+    image: "tbsacr.azurecr.io/performance-dev_debug_php:latest"
     build:
       context: ../
-      dockerfile: docker/performance_debug_php/Dockerfile
+      dockerfile: docker/performance-dev_debug_php/Dockerfile
       args:
         - http_proxy=${HTTP_PROXY}
         - https_proxy=${HTTP_PROXY}
@@ -31,7 +31,7 @@ services:
       - HTTPS_PROXY=${HTTP_PROXY}
     ports:
       - "9000"
-    container_name: performance_debug_web
+    container_name: performance-dev_debug_web
     depends_on:
       - mongodb
     volumes:
