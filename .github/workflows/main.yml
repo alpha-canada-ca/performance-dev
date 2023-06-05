@@ -54,4 +54,4 @@ jobs:
         images: |
           tbsacr.azurecr.io/performance-dev_nginx:${{ github.sha }}
         namespace: |
-          performance        
+          performance
