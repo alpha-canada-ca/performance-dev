@@ -1,4 +1,4 @@
-FROM tbsacr.azurecr.io/performance-dev_php:latest
+FROM tbsdevacr.azurecr.io/performance-dev_php:latest
 RUN pecl install xdebug 
 RUN docker-php-ext-enable xdebug
 COPY docker/performance-dev_debug_php/xdebug.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini

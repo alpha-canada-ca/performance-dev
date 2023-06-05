@@ -18,15 +18,15 @@ jobs:
     
     - uses: Azure/docker-login@v1
       with:
-        login-server: tbsacr.azurecr.io
+        login-server: tbsdevacr.azurecr.io
         username: ${{ secrets.ACR_USERNAME }}
         password: ${{ secrets.ACR_PASSWORD }}
     
     - run: |
-        docker build -f ./docker/performance-dev_php/Dockerfile . -t tbsacr.azurecr.io/performance-dev_php:${{ github.sha }}
-        docker push tbsacr.azurecr.io/performance-dev_php:${{ github.sha }}
-        docker build -f ./docker/performance-dev_nginx/Dockerfile . -t tbsacr.azurecr.io/performance-dev_nginx:${{ github.sha }}
-        docker push tbsacr.azurecr.io/performance-dev_nginx:${{ github.sha }}
+        docker build -f ./docker/performance-dev_php/Dockerfile . -t tbsdevacr.azurecr.io/performance-dev_php:${{ github.sha }}
+        docker push tbsdevacr.azurecr.io/performance-dev_php:${{ github.sha }}
+        docker build -f ./docker/performance-dev_nginx/Dockerfile . -t tbsdevacr.azurecr.io/performance-dev_nginx:${{ github.sha }}
+        docker push tbsdevacr.azurecr.io/performance-dev_nginx:${{ github.sha }}
       
     # Set the target AKS cluster.
     - uses: Azure/aks-set-context@v1
@@ -41,7 +41,7 @@ jobs:
           kubernetes/performance-dev-php-deployment.yml
           kubernetes/performance-dev-php-service.yml
         images: |
-          tbsacr.azurecr.io/performance-dev_php:${{ github.sha }}
+          tbsdevacr.azurecr.io/performance-dev_php:${{ github.sha }}
         namespace: |
           performance
 
@@ -52,6 +52,6 @@ jobs:
           kubernetes/performance-dev-nginx-deployment.yml
           kubernetes/performance-dev-nginx-service.yml
         images: |
-          tbsacr.azurecr.io/performance-dev_nginx:${{ github.sha }}
+          tbsdevacr.azurecr.io/performance-dev_nginx:${{ github.sha }}
         namespace: |
           performance
