@@ -40,6 +40,7 @@ jobs:
         manifests: |
           kubernetes/performance-dev-php-deployment.yml
           kubernetes/performance-dev-php-service.yml
+          kubernetes/performance-dev-alpha-ingress.yml
         images: |
           tbsdevacr.azurecr.io/performance-dev_php:${{ github.sha }}
         namespace: |
