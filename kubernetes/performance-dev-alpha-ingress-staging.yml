@@ -14,10 +14,10 @@ metadata:
 spec:
   tls:
   - hosts:
-    - performance-dev.alpha.canada.ca
+    - performance-dev.tbs.alpha.canada.ca
     secretName: performance-dev-tls-secret-staging
   rules:
-  - host: performance-dev.alpha.canada.ca
+  - host: performance-dev.tbs.alpha.canada.ca
     http:
       paths:
       - backend:
