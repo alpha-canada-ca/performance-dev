@@ -1,4 +1,4 @@
-apiVersion: extensions/v1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: performance-dev-alpha-ingress
@@ -20,10 +20,10 @@ spec:
   - host: performance-dev.tbs.alpha.canada.ca
     http:
       paths:
-      - backend:
+      - path: /
+        pathType: Prefix
+        backend:
           service:
             name: performance-dev-nginx
             port:
-              number: 80
-        path: /
-      
+              number: 80 
