@@ -36,8 +36,9 @@ services:
       - mongodb
     #volumes:
     #  - /home/hyma/performance:/var/www/html
-  mongodb:
+  mongodb-dev:
     image: mongo:latest
+    container_name: mongodb-dev
     ports:
       - 27017:27017
     volumes:
