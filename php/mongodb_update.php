@@ -9,12 +9,12 @@ function mongoUpdate ( $url, $date, $type, $data, $sm, $db, $lang ) {
         $filter = [ 'url' => $url, 'field' => $sm, 'date' => $date, 'lang' => $lang ]; 
         $query = new MongoDB\Driver\Query($filter);
 
-        $res = $mng->executeQuery('pageperformance.' . $db, $query);
+        $res = $mng->executeQuery('pageperformance-dev.' . $db, $query);
         $result = current($res->toArray());
     
         if ( !empty($result) ) {
             $upd = $bulk->update($filter, ['$set' => [$type => $data]]);
-            $mng->executeBulkWrite('pageperformance.' . $db, $bulk);
+            $mng->executeBulkWrite('pageperformance-dev.' . $db, $bulk);
         } else {
                 $ins = [
                     '_id' => new MongoDB\BSON\ObjectID,
@@ -26,7 +26,7 @@ function mongoUpdate ( $url, $date, $type, $data, $sm, $db, $lang ) {
                 ];
 
             $bulk->insert($ins);
-            $mng->executeBulkWrite('pageperformance.' . $db, $bulk);
+            $mng->executeBulkWrite('pageperformance-dev.' . $db, $bulk);
         }
 
     }  catch (MongoDB\Driver\Exception\Exception $e) {

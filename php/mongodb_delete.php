@@ -14,7 +14,7 @@ function mongoDelete ( $url, $db, $type = null, $data = null, $sm = null, $date 
             $bulk->delete($filter);   
         }
 
-        $mng->executeBulkWrite('pageperformance.' . $db, $bulk);
+        $mng->executeBulkWrite('pageperformance-dev.' . $db, $bulk);
 
     }  catch (MongoDB\Driver\Exception\Exception $e) {
 

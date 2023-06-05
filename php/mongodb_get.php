@@ -8,7 +8,7 @@ function mongoGet ( $url, $date, $type, $sm, $db, $lang) {
         $filter = [ 'url' => $url, 'field' => $sm, 'date' => $date, 'lang' => $lang ]; 
         $query = new MongoDB\Driver\Query($filter);
 
-        $res = $mng->executeQuery('pageperformance.' . $db, $query);
+        $res = $mng->executeQuery('pageperformance-dev.' . $db, $query);
         $result = current($res->toArray());
     
         if ( !empty($result)  && property_exists($result,$type) ) {
