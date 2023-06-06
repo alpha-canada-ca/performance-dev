@@ -3,18 +3,18 @@
 function mongoUpdate ( $url, $date, $type, $data, $sm, $db, $lang ) {
     try {
 
-        $mng = new MongoDB\Driver\Manager("mongodb://mongodb-dev:27017");
+        $mng = new MongoDB\Driver\Manager("mongodb://mongodb:27017");
         $bulk = new MongoDB\Driver\BulkWrite;
         
         $filter = [ 'url' => $url, 'field' => $sm, 'date' => $date, 'lang' => $lang ]; 
         $query = new MongoDB\Driver\Query($filter);
 
-        $res = $mng->executeQuery('pageperformance-dev.' . $db, $query);
+        $res = $mng->executeQuery('pageperformance.' . $db, $query);
         $result = current($res->toArray());
     
         if ( !empty($result) ) {
             $upd = $bulk->update($filter, ['$set' => [$type => $data]]);
-            $mng->executeBulkWrite('pageperformance-dev.' . $db, $bulk);
+            $mng->executeBulkWrite('pageperformance.' . $db, $bulk);
         } else {
                 $ins = [
                     '_id' => new MongoDB\BSON\ObjectID,
@@ -26,7 +26,7 @@ function mongoUpdate ( $url, $date, $type, $data, $sm, $db, $lang ) {
                 ];
 
             $bulk->insert($ins);
-            $mng->executeBulkWrite('pageperformance-dev.' . $db, $bulk);
+            $mng->executeBulkWrite('pageperformance.' . $db, $bulk);
         }
 
     }  catch (MongoDB\Driver\Exception\Exception $e) {

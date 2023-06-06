@@ -3,7 +3,7 @@
 function mongoDelete ( $url, $db, $type = null, $data = null, $sm = null, $date = null, $lang = null ) {
     try {
 
-        $mng = new MongoDB\Driver\Manager("mongodb://mongodb-dev:27017");
+        $mng = new MongoDB\Driver\Manager("mongodb://mongodb:27017");
         $bulk = new MongoDB\Driver\BulkWrite;
         $filter = [ 'url' => $url ]; 
 
@@ -14,7 +14,7 @@ function mongoDelete ( $url, $db, $type = null, $data = null, $sm = null, $date 
             $bulk->delete($filter);   
         }
 
-        $mng->executeBulkWrite('pageperformance-dev.' . $db, $bulk);
+        $mng->executeBulkWrite('pageperformance.' . $db, $bulk);
 
     }  catch (MongoDB\Driver\Exception\Exception $e) {
 

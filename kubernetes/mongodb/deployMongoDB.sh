@@ -1,1 +1,1 @@
-helm install -f values.yml mongodb-dev bitnami/mongodb --set usePassword=false --namespace performance
+helm install -f values.yml mongodb bitnami/mongodb --set usePassword=false --namespace performance
