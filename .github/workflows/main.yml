@@ -38,8 +38,6 @@ jobs:
     - uses: Azure/k8s-deploy@v1
       with:
         manifests: |
-          kubernetes/mongodb-deployment.yml
-          kubernetes/mongodb-service.yml
           kubernetes/performance-dev-php-deployment.yml
           kubernetes/performance-dev-php-service.yml
           kubernetes/performance-dev-alpha-ingress.yml
