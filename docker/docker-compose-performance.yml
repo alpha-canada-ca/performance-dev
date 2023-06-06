@@ -11,8 +11,6 @@ services:
       - web
     restart: always
     container_name: performance-dev_nginx
-    #volumes:
-    #  - /home/hyma/performance:/var/www/html
   web:
     image: "tbsdevacr.azurecr.io/performance-dev_php:latest"
     build:
@@ -33,8 +31,13 @@ services:
       - "9000"
     container_name: performance-dev_web
     depends_on:
-      - mongodb-dev
-    #volumes:
-    #  - /home/hyma/performance:/var/www/html
-  mongodb-dev:
+      - mongodb
+  mongodb:
     image: mongo:latest
+    container_name: mongodb
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb_data_container:/data/db
+volumes:
+  mongodb_data_container:
