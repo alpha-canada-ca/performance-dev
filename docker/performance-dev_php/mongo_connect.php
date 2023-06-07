@@ -1,5 +1,5 @@
 <?php
-$mng = new MongoDB\Driver\Manager("mongodb://mongodb-dev:27017");
+$mng = new MongoDB\Driver\Manager("mongodb://mongodb:27017");
 $bulk = new MongoDB\Driver\BulkWrite;
 $filter = ['url' => 'www.google.com', 'date' => 'today'];
 

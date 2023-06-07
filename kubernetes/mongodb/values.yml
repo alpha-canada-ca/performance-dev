@@ -1,4 +1,3 @@
-usePassword: false
 mongodbExtraFlags:
  "--wiredTigerCacheSizeGB=1"
 resources: 
