@@ -73,7 +73,7 @@ data:
             fastcgi_send_timeout 3000;
             fastcgi_param SCRIPT_FILENAME $request_filename;
             fastcgi_intercept_errors on;
-            fastcgi_pass performance-php:9000;
+            fastcgi_pass performance-dev-php:9000;
             try_files $uri =404;
           }
           location ~ /\.ht {
