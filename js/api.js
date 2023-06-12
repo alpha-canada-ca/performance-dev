@@ -3018,6 +3018,17 @@ const mainQueue = (url, start, end, lang) => {
                     setQueryParams(oUrl, date);
                     $("#loadComp").empty()
 
+                    // if not canada.ca site, remove these sections from the page 
+                    if (!url.includes("www.canada.ca")) {
+                        // 👉️ substring is contained in string
+                        $('#srchA-container').addClass("hidden");
+                        $('#snum-container').addClass("hidden");
+                        $('#search-container').addClass("hidden");
+                        $('#h2href').addClass("hidden");
+                        $('#details-panel2').addClass("hidden");
+                        ($("#details-panel2-lnk").closest("li")).addClass("hidden");
+                    }
+
                     $("#canvas-container").removeClass("hidden");
                 }
 
