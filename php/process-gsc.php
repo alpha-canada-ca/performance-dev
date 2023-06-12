@@ -29,15 +29,18 @@ $d = json_decode(file_get_contents('php://input'));
 
 require __DIR__ . '/lib/country_en-fr.php';
 
+// example query
 /*
 $url = "https://www.canada.ca/en/public-health/services/diseases/coronavirus-disease-covid-19.html";
 $date = [ "7daysago", "yesterday" ];
 $lang = "en";
 */
 
+$range = $d->oRange; // the range between the start date and end date
+$endDate = $d->oEndDate; // the range between the end date and today
 $days = $d->day;
 $date = $d->dates;
-if ($days == 1) { $days = 4; $date = [ ( $days . "daysago" ), "yesterday" ]; }
+$date = [ ( $range + $endDate . "daysago" ), ( $endDate + 1 . "daysago" ) ]; // [start, end]
 $url = $d->oUrl;
 $start = $date[0];
 $end = $date[1];

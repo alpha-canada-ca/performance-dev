@@ -39,6 +39,8 @@ try {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $d = json_decode(file_get_contents('php://input'));
         $url = $d->oUrl;
+        $range = $d->oRange;
+        $endDate = $d->oEndDate;
         $date = $d->dates;
         $start = $date[0];
         $end = $date[1];
@@ -46,6 +48,8 @@ try {
         $dbAccess = "search";
     } else if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         $url = $_REQUEST["url"];
+        $range = $_REQUEST["range"];
+        $endDate = $_REQUEST["oEndDate"];
         $start = $_REQUEST["start"];
         $end = $_REQUEST["end"];
         $oLang = $_REQUEST["lang"];
@@ -60,14 +64,26 @@ try {
         $iso = 'Y-m-d\TH:i:s.v';
 
         $today = new DateTime("today");
+        // $today = $today->modify('-3 day');
+        // modify $today by subtracting the $endDate value
+        $today = $today->modify('-' . $endDate . ' day');
+        // $today = $today->modify('-' . $range . ' day');
         $end = $today->format($iso);
 
-        $yesterday = $today->modify('-1 day')
-            ->format($iso);
+        /*
+        $yesterday = $today->modify('-6 day')
+        ->format($iso);
         $week = $today->modify('-6 day')
-            ->format($iso);
-        $month = $today->modify('-23 day')
-            ->format($iso);
+        ->format($iso);
+        $month = $today->modify('-6 day')
+        ->format($iso);*/
+
+        $yesterday = $today->modify('-' . $range . ' day')
+        ->format($iso);
+        $week = $today->modify('-' . $range . ' day')
+        ->format($iso);
+        $month = $today->modify('-' . $range . ' day')
+        ->format($iso);
 
         $dates2 = [$month, $week, $yesterday];
 

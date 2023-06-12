@@ -6,6 +6,8 @@ try {
     $data = include ('data.php');
 
     $url = $d->oUrl;
+    $range = $d->oRange;
+    $endDate = $d->oEndDate;
     $date = $d->dates;
     $type = $d->type;
     $field =  $d->field;
@@ -16,6 +18,10 @@ try {
     $mode = (empty($_REQUEST["mode"])) ? "update" : $_REQUEST["mode"];
 
     $today = new DateTime("today");
+    $today = $today->modify('-' . $endDate . ' day');
+    // $today = $today->modify('-3 day');
+    // modify $today by subtracting the $range value
+    // $today = $today->modify('-' . $range . ' day');
 
     if ($field == "aa") {
         $iso = 'Y-m-d\TH:i:s.v';
@@ -26,11 +32,18 @@ try {
     }
     $start = (new DateTime($start))->format($iso);    
 
-    $yesterday = $today->modify('-1 day')
-        ->format($iso);
+    /*$yesterday = $today->modify('-6 day')
+    ->format($iso);
     $week = $today->modify('-6 day')
+    ->format($iso);
+    $month = $today->modify('-6 day')
+    ->format($iso);*/
+
+    $yesterday = $today->modify('-' . $range . ' day')
         ->format($iso);
-    $month = $today->modify('-23 day')
+    $week = $today->modify('-' . $range . ' day')
+        ->format($iso);
+    $month = $today->modify('-' . $range . ' day')
         ->format($iso);
 
     $dates2 = [$month, $week, $yesterday];
