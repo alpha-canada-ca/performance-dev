@@ -234,8 +234,6 @@
           background-color: #000000;
         }
 
-        #dt-rng {  }
-
         @media (min-width: 320px) and (max-width: 991px) {
             .mobile-visible { display: block; margin-bottom: 15px; }
             .desktop-visible { display: none; }  
@@ -257,17 +255,20 @@
         }
 
         #ajax-status-alert {
-    position: fixed;
-    bottom: 10px;
-    right: 15px;
-    z-index: 1001;
-}
+            position: fixed;
+            bottom: 10px;
+            right: 15px;
+            z-index: 1001;
+        }
 
-.ajax-status-alert__text + .ajax-status-alert__icon {
-    display: inline-block;
-    margin-left: 5px;
-}
+        .ajax-status-alert__text + .ajax-status-alert__icon {
+            display: inline-block;
+            margin-left: 5px;
+        }
 
+        #date-range {
+            display: none; /* Hide the date range dropdown but do not delete the date range dropdown so that data-index will always be set to 2 in the background */
+        }
     </style>
     <!-- Write closure template -->
     <script>
@@ -338,15 +339,37 @@
             </div>
 
             <div class="form-group">
-            <label for="date-range" id="dt-rng" data-i18n="select-date"></label>
-
-               <select id="date-range" class="form-control" name="date-range">
-                                <option data-value="31" data-index="0" value="0" data-i18n="Last30days"></option>
-                                <option data-value="8" data-index="1" value="1" data-i18n="Last7days" selected="selected"></option>
-                                <option data-value="2" data-index="2" value="2" data-i18n="Yesterday"></option>
-                            </select>
+                <select id="date-range" class="form-control" name="date-range">
+                    <option data-value="2" data-index="2" value="2" data-i18n="Yesterday" selected="selected"></option> <!-- data-index must equal 2 so that process.php can use $yesterday -->
+                </select>
+                <!-- calendar date picker for startdate -->
+                <div class="form-group">
+                    <label for="startdate" class="required"><span class="field-name" data-i18n="select-startdate"></span> <strong class="required" data-i18n="Required"></strong></label>
+                    <input class="form-control" type="date" id="startdate" name="startdate" required="required"/>
                 </div>
-                <button data-gc-analytics-formsubmit="submit" class="btn btn-default" id="searchBttn" type="submit"><span class="glyphicon-search glyphicon"></span> <span data-i18n="Getdata"></span></button>
+                <script>startdate.max = new Date().toISOString().split("T")[0];</script>
+
+                <!-- calendar date picker for enddate -->
+                <div class="form-group">
+                    <label for="enddate" class="required"><span class="field-name" data-i18n="select-enddate"></span> <strong class="required" data-i18n="Required"></strong></label>
+                    <input class="form-control" type="date" id="enddate" name="enddate" required="required"/>
+                </div>
+                <script>enddate.max = new Date().toISOString().split("T")[0];</script>
+                <script>
+                    // Get the start date and end date input elements
+                    var startdateInput = document.getElementById("startdate");
+                    var enddateInput = document.getElementById("enddate");
+
+                    // prevent the user from setting an invalid date range, such as an enddate that is before the startdate
+                    startdateInput.addEventListener("input", function() {
+                        enddateInput.min = startdateInput.value;
+                    });
+                    enddateInput.addEventListener("input", function() {
+                        startdateInput.max = enddateInput.value;
+                    });
+                </script>
+            </div>
+            <button data-gc-analytics-formsubmit="submit" class="btn btn-default" id="searchBttn" type="submit"><span class="glyphicon-search glyphicon"></span> <span data-i18n="Getdata"></span></button>
 
 
         </form>
@@ -360,8 +383,13 @@
             <span id="loadFD" aria-live="polite" aria-atomic="true" aria-relevant="all"></span>
             <span id="loadComp" aria-live="assertive" aria-atomic="true" aria-relevant="all"></span>
         </p>
+        <!-- return error message invalid url if 'notfound' triggered in api.js after 'Get data' button clicked-->
         <div id="notfound" class="hidden" aria-live="assertive" aria-atomic="true" aria-relevant="additions" style="padding-top:15px">
             <p><i class="fas fa-exclamation-triangle" style="padding-right:15px"></i><span data-i18n="Opps"></span></p>
+        </div>
+        <!-- return error message invalid date range if 'startDateWords == "Invalid Date" || endDateWords == "Invalid Date' triggered in api.js after 'Get data' button clicked-->
+        <div id="invaliddaterange" class="hidden" aria-live="assertive" aria-atomic="true" aria-relevant="additions" style="padding-top:15px">
+            <p><i class="fas fa-exclamation-triangle" style="padding-right:15px"></i><span data-i18n="Opps2"></span></p>
         </div>
         <div id="error" class="hidden" aria-live="assertive" aria-atomic="true" aria-relevant="additions" style="padding-top:15px">
             <p><i class="fas fa-exclamation-triangle" style="padding-right:15px"></i><span class="error_display" data-i18n="errorOccured"></span></p>
@@ -438,7 +466,7 @@
                             <p>
                                 <span id="fromGSC" class="hidden"></span>
                                 <span id="toGSC" class="hidden"></span>
-                                <strong data-i18n="Period:"></strong> <span id="ddDate"></span> - <span id="fromdaterange"></span> <span id="to" data-i18n="to"></span> <span id="todaterange"></span>
+                                <strong data-i18n="Period:"></strong> <span id="fromdaterange"></span> <span id="to" data-i18n="to"></span> <span id="todaterange"></span> <!-- display the date range for the 'Web analytics' data retreived in words -->
                                 <!--<sup id="fn1-rf"><a class="fn-lnk" href="#fn1"><span class="wb-inv">Footnote </span>1</a></sup>-->
                             </p>
 
@@ -699,7 +727,7 @@
                         <summary><span data-i18n="Googlesearchanalytics"></span></summary>
                         <div id="gsc-content">
                         <p>
-                            <strong data-i18n="Period:"></strong> <span id="gscDate"></span> - <span id="fromdaterangegsc"></span> <span id="gscto" data-i18n="to"></span> <span id="todaterangegsc"></span> <sup id="fn1b-rf"><a class="fn-lnk" href="#fn1b"><span class="wb-inv">Footnote </span>1</a></sup>
+                            <strong data-i18n="Period:"></strong> <span id="fromdaterangegsc"></span> <span id="gscto" data-i18n="to"></span> <span id="todaterangegsc"></span> <sup id="fn1b-rf"><a class="fn-lnk" href="#fn1b"><span class="wb-inv">Footnote </span>1</a></sup> <!-- display the date range for the 'Google Search analytics' data retreived in words -->
                         </p>
                         <div class="col-md-3 col-md-offset-3" style="vertical-align: top;">
                             <section class="bg bg-success text-center brdr-lft brdr-lft brdr-rght brdr-tp brdr-bttm">
@@ -1044,7 +1072,7 @@
         }
     </script>
     <script type="text/javascript" src="js/whitelist.js"></script>
-    <script type="text/javascript" src="js/api.min.js"></script>
+    <script type="text/javascript" src="js/api.js"></script>
     <script type="text/javascript">_satellite.pageBottom();</script>
 </body>
 
