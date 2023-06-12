@@ -647,7 +647,8 @@ const RANGE = (a, b) => Array.from((function*(x, y) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
 
-const jsonTrendGenerate = (json, day, dates) => {
+// Year-over-year comparison of visits table
+const jsonTrendGenerate = (json, dates, oRange) => {
     var rows = json['rows'];
 
     if (rows != null) {
@@ -655,25 +656,25 @@ const jsonTrendGenerate = (json, day, dates) => {
         $("#trends-canvas").append("<canvas id='trends'></canvas>")
 
         var keys = Object.keys(rows);
-        var arr = [];
-        for(var i=0; i<keys.length; i++){
-            var key = keys[i];
-            arr.push( rows[key]['data'] )
-        }
+            var arr = [];
+            for(var i=0; i<keys.length; i++){
+                var key = keys[i];
+                arr.push( rows[key]['data'] )
+                console.log("pushed " + rows[key]['data']);
+            }
 
         $cnt = arr.length
-        val = arr.slice(0, $cnt / 2);
-        lval = arr.slice($cnt / 2, $cnt);
+        console.log("cnt is " + $cnt);
+        console.log("arr is " + arr);
+        val = arr.slice(0, $cnt / 2); // the first half of the array stores the current year's data
+        lval = arr.slice($cnt / 2, $cnt); // the second half of the array stores the previous year's data
+        console.log("val before " + val)
+        console.log("lval before " + lval)
 
-        if (day == 1) {
-            val = val.slice(-7);
-            lval = lval.slice(-7);
-        } else if (day == 2) {
-            val = val.slice(-1);
-            lval = lval.slice(-1);
-        }
-
-        console.log(val)
+        val = val.slice(-oRange);
+        lval = lval.slice(-oRange);
+        console.log("val after " + val)
+        console.log("lval after " + lval)
 
         $cnt = val.length;
 
@@ -1765,12 +1766,17 @@ const jsonMetrics = (json, day) => {
         //uv = parseInt(uv).toLocaleString(document.documentElement.lang+"-CA");
         $avgtime.prepend("<span class='h2'>" + atMin + " min " + atSec + " sec" + "</span>"); //</br><span class'small'>" + $.i18n("hours") + "</span>"); //</br><span class='small'>" + uv +" "+ $.i18n("total")+"</span>");
 
-        if ( day === 2 ) {
+        // Determine if startDateWA and endDateWA are the same day and set sameDay to true or false accordingly
+        var startDateWA = $('#startdate').val();
+        var endDateWA = $('#enddate').val();
+        var sameDay = moment(startDateWA).isSame(moment(endDateWA), 'day');
+
+        if ( sameDay ) { // if startDateWA and endDateWA are the same day, do not display averages for unique visits, visits, and page views on the Web analytics tab
             $uv.prepend("<span class='h2'>" + uv + "</span>");
             $visit.prepend("<span class='h2'>" + visit + "</span>");
             $pagev.prepend("<span class='h2'>" + pv + "</span>");
             ($avgtime.closest('section')).height('98px');
-        } else {
+        } else { // otherwise display the daily averages for unique visits, visits, and page views on the Web analytics tab
             $uv.prepend("<span class='h2'>" + uv + "</span></br><div class='small'>" + $.i18n("Dailyaverage") + "</br>" + uvDays + "</div>");
             $visit.prepend("<span class='h2'>" + visit + "</span></br><div class='small'>" + $.i18n("Dailyaverage") + "</br>" + vDays + "</div>");
             $pagev.prepend("<span class='h2'>" + pv + "</span></br><div class='small'>" + $.i18n("Dailyaverage") + "</br>" + pvDays + "</div>");
@@ -1953,10 +1959,15 @@ const jsonGSCTotal = (json, day) => {
             vImp = parseInt(imp / $days).toLocaleString(document.documentElement.lang + "-CA");
              //</br><span class='small'>" + visit +" "+ $.i18n("total")+"</span>");
 
-            if ( day === 2 ) {
+            // Determine if startDateGSC and endDateGSC are the same day and set sameDay to true or false accordingly
+            var startDateGSC = $('#startdate').val();
+            var endDateGSC = $('#enddate').val();
+            var sameDay = moment(startDateGSC).isSame(moment(endDateGSC), 'day');
+
+            if ( sameDay ) { // if startDateGSC and endDateGSC are the same day, do not display averages for clicks and impressions on the Google Search analytics tab
                 $clicks.prepend("<span class='h2'>" + fClicks + "</span>"); 
                 $imp.prepend("<span class='h2'>" + fImp + "</span>");
-            } else {
+            } else { // otherwise display the daily averages for clicks and impressions on the Google Search analytics tab
                 $clicks.prepend("<span class='h2'>" + fClicks + "</span></br><div class='small'>" + $.i18n("Dailyaverage") + "</br>" + vClicks + "</div>"); 
                 $imp.prepend("<span class='h2'>" + fImp + "</span></br><div class='small'>" + $.i18n("Dailyaverage") + "</br>" + vImp + "</div>");
             }
@@ -2335,10 +2346,10 @@ function fetchWithTimeout(url, options, delay, onTimeout) {
     })
 }
 
-const apiCall = (d, i, a, uu, dd, fld, lg) => a.map(type => {
+const apiCall = (d, i, a, uu, dd, fld, lg, r, e) => a.map(type => {
     url = (type == "fle") ? "php/file.php" : "php/process.php"
 
-    post = { dates: d, url: i, type: type, oUrl: uu, field: fld, lang : lg };
+    post = { dates: d, url: i, type: type, oUrl: uu, field: fld, lang : lg, oRange: r, oEndDate: e };
 
     let request = new Request(url, {
         method: "POST",
@@ -2361,7 +2372,7 @@ const apiCall = (d, i, a, uu, dd, fld, lg) => a.map(type => {
             case "srchLeftAll":
                 return jsonSearchesPhrases(res, dd);
             case "trnd":
-                return jsonTrendGenerate(res, dd, d);
+                return jsonTrendGenerate(res, d, r);
                 //case "pltfrm" : return jsonPieGenerate(res);
             case "prvs":
                 return jsonPrevious(res, dd);
@@ -2402,10 +2413,10 @@ const apiCall = (d, i, a, uu, dd, fld, lg) => a.map(type => {
 
 });
 
-const apiCall2 = (d, i, a, uu, lg) => a.map(type => {
+const apiCall2 = (d, i, a, uu, lg, r, e) => a.map(type => {
     url = "php/process-new.php";
 
-    post = { dates: d, url: i, oUrl: uu, lang: lg };
+    post = { dates: d, url: i, oUrl: uu, lang: lg, oRange: r, oEndDate: e };
 
     let request = new Request(url, {
         method: "POST",
@@ -2427,10 +2438,10 @@ const apiCall2 = (d, i, a, uu, lg) => a.map(type => {
 
 });
 
-const apiCallGSC2 = (d, i, a, uu, dd, lg) => a.map(type => {
+const apiCallGSC2 = (d, i, a, uu, dd, lg, r, e) => a.map(type => {
     url = "php/process-gsc.php";
 
-    post = { dates: d, url: i, oUrl: uu, day: dd, lang: lg };
+    post = { dates: d, url: i, oUrl: uu, day: dd, lang: lg, oRange: r, oEndDate: e };
 
     let request = new Request(url, {
         method: "POST",
@@ -2438,9 +2449,14 @@ const apiCallGSC2 = (d, i, a, uu, dd, lg) => a.map(type => {
     });
 
     return fetch(request).then(res => res.json()).then(res => {
+        // display the date range on the frontend in the format "Tuesday May 30, 2023 to Friday June 02, 2023"
+        var vStart2 = $('#startdate').val();
+        var vEnd2 = $('#enddate').val();
+        var start2 = moment(vStart2).format("YYYY-MM-DDTHH:mm:ss.SSS"); 
+        var end2 = moment(vEnd2).format("YYYY-MM-DDTHH:mm:ss.SSS");
+        var localLocaleStart = moment(start2);
+        var localLocaleEnd = moment(end2);
 
-        var localLocaleStart = moment(res['start']);
-        var localLocaleEnd = moment(res['end']);
         var diff = localLocaleEnd.diff(localLocaleStart, 'days') + 1;
 
         $("#urlStatic").html(res['url']);
@@ -2450,13 +2466,16 @@ const apiCallGSC2 = (d, i, a, uu, dd, lg) => a.map(type => {
         localLocaleStart.locale(document.documentElement.lang);
         localLocaleEnd.locale(document.documentElement.lang);
 
-        var fromdaterangegsc = localLocaleStart.format("dddd MMMM DD, YYYY");
-        var todaterangegsc = localLocaleEnd.format("dddd MMMM DD, YYYY");
-
+        var startDateWordsSet = new Date(vStart2);
+        startDateWordsSet.setDate(startDateWordsSet.getDate() + 1);
+        var endDateWordsSet = new Date(vEnd2);
+        endDateWordsSet.setDate(endDateWordsSet.getDate() + 1);
+        var startDateWords = startDateWordsSet.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' }).replace(',', '');
+        var endDateWords = endDateWordsSet.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' }).replace(',', '');
 
         $dd = $('#date-range').find(':selected').data('index');
-        $("#fromdaterangegsc").html("<strong>" + fromdaterangegsc + "</strong>");
-        $("#todaterangegsc").html("<strong>" + todaterangegsc + "</strong>");
+        $("#fromdaterangegsc").html("<strong>" + startDateWords + "</strong>");
+        $("#todaterangegsc").html("<strong>" + endDateWords + "</strong>");
 
         $("#numDaysgsc").html(diff);
 
@@ -2651,15 +2670,57 @@ const mainQueue = (url, start, end, lang) => {
     console.log(url);
 
     //url = removeQueryString(url);
+    // hide previously displayed canvas and error messages if any
     $("#canvas-container").addClass("hidden");
     $("#whole-canvas").addClass("hidden");
     $("#notfound").addClass("hidden")
+    $("#invaliddaterange").addClass("hidden")
     hideError();
     $("#loading").removeClass("hidden");
 
-    $success = 0;
+    $success = 0; // initial $success as 0, which is false, if success is still 0 after all the API calls, then display error message
 
     console.log(url);
+
+    var vStart2 = $('#startdate').val();
+    var vEnd2 = $('#enddate').val();
+
+    var start2 = moment(vStart2).format("YYYY-MM-DDTHH:mm:ss.SSS"); 
+    var end2 = moment(vEnd2).format("YYYY-MM-DDTHH:mm:ss.SSS");
+
+    console.log("start2" + start2);
+    console.log("end2" + end2);
+
+    var startDateWordsSet = new Date(vStart2);
+    startDateWordsSet.setDate(startDateWordsSet.getDate() + 1);
+    var endDateWordsSet = new Date(vEnd2);
+    endDateWordsSet.setDate(endDateWordsSet.getDate() + 1);
+    var startDateWords = startDateWordsSet.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' }).replace(',', '');
+    var endDateWords = endDateWordsSet.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' }).replace(',', '');
+
+    console.log("startDateWords" + startDateWords);
+    console.log("endDateWords" + endDateWords);
+
+    // Calculate the numerical date range between start2 and end2
+    var rangeStart2ToEnd2 = moment(end2).diff(moment(start2), 'days') + 1;
+
+    // Calculate the numerical date range between end2 and today
+    var rangeEnd2ToToday = moment().subtract(1, 'day').diff(moment(end2), 'days');
+
+    console.log("Numerical date range between start2 and end2: " + rangeStart2ToEnd2);
+    console.log("Numerical date range between end2 and today: " + rangeEnd2ToToday);
+
+    // if either the start date or end date is empty or invalid, or the date range is invalid, display error message
+    if ( startDateWords == "Invalid Date" || endDateWords == "Invalid Date" || rangeStart2ToEnd2 == "NaN" || rangeEnd2ToToday == "Nan" )  { 
+        $("#loading").addClass("hidden");
+        $("#loadFD").empty();
+        $("#searchBttn").prop("disabled", false); // enavle the search button so user can search again with a different date range
+        // hideError();
+        $("#invaliddaterange").removeClass("hidden"); // display invalid date range error message
+    }
+
+    // Determine if vStart2 and vEnd2 are the same day and set sameDay to true or false accordingly
+    var sameDay = moment(vStart2).isSame(moment(vEnd2), 'day');
 
         /*
     console.log(url);
@@ -2708,9 +2769,9 @@ const mainQueue = (url, start, end, lang) => {
             else if ($dd == 1) { vStart = moment(start).subtract(7, 'days').format("dddd MMMM DD, YYYY");  }
             else if ($dd == 2) { vStart = moment(start).subtract(1, 'days').format("dddd MMMM DD, YYYY");  }
         }
-        var start = moment(vStart).format("YYYY-MM-DDTHH:mm:ss.SSS");
-        var end = moment(vEnd).format("YYYY-MM-DDTHH:mm:ss.SSS");
-        var endMD = moment(vEnd).subtract(1, "days").format("YYYY-MM-DDTHH:mm:ss.SSS")
+        var start = moment(vStart2).format("YYYY-MM-DDTHH:mm:ss.SSS");
+        var end = moment(vEnd2).format("YYYY-MM-DDTHH:mm:ss.SSS");
+        var endMD = moment(vEnd2).subtract(1, "days").format("YYYY-MM-DDTHH:mm:ss.SSS")
 
         var dateMD = [ start , endMD ]
         var d = [start, end];
@@ -2723,11 +2784,9 @@ const mainQueue = (url, start, end, lang) => {
         localLocaleStart.locale(document.documentElement.lang);
         localLocaleEnd.locale(document.documentElement.lang);
 
-        var fromdaterange = localLocaleStart.format("dddd MMMM DD, YYYY");
-        var todaterange = localLocaleEnd.subtract(1, "days").format("dddd MMMM DD, YYYY");
-
-        $("#fromdaterange").html("<strong>" + fromdaterange + "</strong>");
-        $("#todaterange").html("<strong>" + todaterange + "</strong>");
+        // display the start date and end date in words in index.html
+        $("#fromdaterange").html("<strong>" + startDateWords + "</strong>");
+        $("#todaterange").html("<strong>" + endDateWords + "</strong>");
 
         var start = moment(vStart);
         var end = moment(vEnd);
@@ -2741,10 +2800,12 @@ const mainQueue = (url, start, end, lang) => {
         dYear = end.diff(start, "year", true);
         */
 
-        $("#numDays").html(dDay);
+        $("#numDays").html(rangeStart2ToEnd2);
         $("#numWeeks").html(dWeek);
 
+        if (!( startDateWords == "Invalid Date" || endDateWords == "Invalid Date" || rangeStart2ToEnd2 == "NaN" || rangeEnd2ToToday == "Nan" ))  {
         $("#searchBttn").prop("disabled", true);
+        }
 
         var dbCall = ["dbGet"];
         var langAbbr;
@@ -2789,14 +2850,14 @@ const mainQueue = (url, start, end, lang) => {
             url = $("#urlStatic").html();
             oUrl = $("#urlStatic").html();
 
-            return Promise.all(apiCall2(d, url, dbCall, oUrl, lang))
+            return Promise.all(apiCall2(d, url, dbCall, oUrl, lang, rangeStart2ToEnd2, rangeEnd2ToToday ))
         }
 
         // Get Google Search Console data if it is cached, if not it will query and update database 
         const dbGetGSC = () => {
                 if ( !$isApp ) {
                     $("#loadGSC").html($.i18n("FetchdataGSC"));
-                    return Promise.all(apiCallGSC2(d, url, dbCall, oUrl, dDay, lang))
+                    return Promise.all(apiCallGSC2(d, url, dbCall, oUrl, dDay, lang, rangeStart2ToEnd2, rangeEnd2ToToday))
                 }
                 return Promise.resolve("null");
             }
@@ -2809,7 +2870,7 @@ const mainQueue = (url, start, end, lang) => {
                 url = $("#urlStatic").html();
                 oUrl2 = $("#urlStatic").html();
             }
-            return Promise.all(apiCall(d, url, match, oUrl2, $dd, "aa", langAbbr))
+            return Promise.all(apiCall(d, url, match, oUrl2, $dd, "aa", langAbbr, rangeStart2ToEnd2, rangeEnd2ToToday ))
         }
 
         // pull GSC data and display
@@ -2819,7 +2880,7 @@ const mainQueue = (url, start, end, lang) => {
                 url = $("#urlStatic").html();
                 oUrl = $("#urlStatic").html();
                 dd = [$("#fromGSC").text(), $("#toGSC").text()];
-                Promise.all(apiCall(dd, url, gsc, oUrl, $dd, "gsc", langAbbr))
+                Promise.all(apiCall(dd, url, gsc, oUrl, $dd, "gsc", langAbbr, rangeStart2ToEnd2, rangeEnd2ToToday ))
                 return res;
             }
             return res;
@@ -2937,7 +2998,14 @@ const mainQueue = (url, start, end, lang) => {
                     $("#loadComp").html($.i18n("FetchdataComplete"))
                     setQueryParams(oUrl, date);
                     $("#loadComp").empty()
-                } else {
+                } /*else if ( startDateWords == "Invalid Date" || endDateWords == "Invalid Date" || rangeStart2ToEnd2 == "NaN" || rangeEnd2ToToday == "Nan" )  { // if either the start date or end date is empty
+                    $("#loading").addClass("hidden");
+                    $("#loadFD").empty();
+                    $("#searchBttn").prop("disabled", false);
+                    hideError();
+                    $("#invaliddaterange").removeClass("hidden"); // display invalid date range error message
+                }*/
+                else {
                     $("#loading").addClass("hidden");
                     $("#loadFD").empty();
                     hideError();
@@ -2959,7 +3027,8 @@ const mainQueue = (url, start, end, lang) => {
                 else if ( $dd == 1 ) { $("#gscDate").html($.i18n("Last7days")); $("#ddDate").html($.i18n("Last7days")); }
                 else if ( $dd == 2 ) { $("#gscDate").html($.i18n("Yesterday")); $("#ddDate").html($.i18n("Yesterday")); }
 
-                if ( $dd === 2 ) {
+                // if sameDay is true then hide the "to" date range becasue it is the same as the "from" date range
+                if ( sameDay ) {
                     $("#todaterange").addClass('hidden');
                     $("#to").addClass('hidden');
                     $("#todaterangegsc").addClass('hidden');
@@ -2976,10 +3045,10 @@ const mainQueue = (url, start, end, lang) => {
             })
             .catch(console.error.bind(console));
 
-        $success = 1;
-
+        $success = 1; // set $success to 1, which is true, if we get to this point, then all the API calls were successful
     }
-
+    
+    // display error message notfound if $success is still 0 after all the API calls
     if (!$success) {
         $("#loading").addClass("hidden");
         $("#notfound").removeClass("hidden");
