@@ -648,7 +648,12 @@ const RANGE = (a, b) => Array.from((function*(x, y) {
   };
 
 // Year-over-year comparison of visits table
+// dates[0] = start date, dates[1] = end date, oRange = number of days in the range
 const jsonTrendGenerate = (json, dates, oRange) => {
+    // add 1 day to dates[1]
+    // this fixes a bug where the enddate is labelled as undefined in 'Visits for current year and previous year - Table'
+    dates[1] = moment(dates[1]).add(1, 'days').format("YYYY-MM-DD");
+
     var rows = json['rows'];
 
     if (rows != null) {
