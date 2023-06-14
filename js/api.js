@@ -2679,7 +2679,6 @@ const mainQueue = (url, start, end, lang) => {
     $("#canvas-container").addClass("hidden");
     $("#whole-canvas").addClass("hidden");
     $("#notfound").addClass("hidden")
-    $("#invaliddaterange").addClass("hidden")
     hideError();
     $("#loading").removeClass("hidden");
 
@@ -2719,9 +2718,8 @@ const mainQueue = (url, start, end, lang) => {
     if ( startDateWords == "Invalid Date" || endDateWords == "Invalid Date" || rangeStart2ToEnd2 == "NaN" || rangeEnd2ToToday == "Nan" )  { 
         $("#loading").addClass("hidden");
         $("#loadFD").empty();
-        $("#searchBttn").prop("disabled", false); // enavle the search button so user can search again with a different date range
+        $("#searchBttn").prop("disabled", false); // enable the search button so user can search again with a different date range
         // hideError();
-        $("#invaliddaterange").removeClass("hidden"); // display invalid date range error message
     }
 
     // Determine if vStart2 and vEnd2 are the same day and set sameDay to true or false accordingly
@@ -3067,7 +3065,11 @@ const mainQueue = (url, start, end, lang) => {
     // display error message notfound if $success is still 0 after all the API calls
     if (!$success) {
         $("#loading").addClass("hidden");
-        $("#notfound").removeClass("hidden");
+        // if url is not empty, display notfound error message
+        // if url is empty, no need for notfound error message because other error message already displayed
+        if (url) {
+            $("#notfound").removeClass("hidden");
+        }
 
         $("#notfound").attr("data-gc-analytics-customcall","CRA-ARC Page analytics tool - Error:Search unsuccessful");
         _satellite.track("CUSTOM_TRACK");

@@ -10,7 +10,6 @@
     "PlaceURL": "URL",
     "Loading...": "Chargement...",
     "Opps": "Oh oh ! Il semble que votre recherche ait échoué… Veuillez-vous assurer d'entrer une URL Canada.ca valide.",
-    "Opps2": "Uh oh! Looks like your search was unsuccessful… Please make sure you enter both a start date and end date.",
     "Page-levelstatistics": "Statistiques de la page : ",
     "Period:": "Plage de dates : ",
     "days-": "jours - ",
@@ -182,6 +181,6 @@
     "Visitorprofile": "Profil du visiteur",
     "Visitoractivity": "Activité de visiteur",
     "Didyouknow": "Le savais-tu?",
-    "moreDetailedAnalysis": " Si vous désirez une analyse plus détaillée de cette page Web, veuillez contacter vos <a target='_blank' href='https://statics.teams.cdn.office.net/evergreen-assets/safelinks/1/atp-safelinks.html'>représentants institutionnels en analytique Web</a> (accessible uniquement sur le réseau du gouvernement du Canada)."
+    "moreDetailedAnalysis": "Si vous désirez une analyse plus détaillée de cette page Web, veuillez contacter vos <a target='_blank' href='https://statics.teams.cdn.office.net/evergreen-assets/safelinks/1/atp-safelinks.html'>représentants institutionnels en analytique Web</a> (accessible uniquement sur le réseau du gouvernement du Canada)."
 
 }

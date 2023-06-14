@@ -48,7 +48,7 @@
     </script>
     <noscript>
             <link rel="stylesheet" href="gcweb/wet-boew/css/noscript.min.css" />
-            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" /> <!-- broken -->
          </noscript>
     <style>
         canvas {
@@ -399,14 +399,10 @@
         </p>
         <!-- return error message invalid url if 'notfound' triggered in api.js after 'Get data' button clicked-->
         <div id="notfound" class="hidden" aria-live="assertive" aria-atomic="true" aria-relevant="additions" style="padding-top:15px">
-            <p><i class="fas fa-exclamation-triangle" style="padding-right:15px"></i><span data-i18n="Opps"></span></p>
-        </div>
-        <!-- return error message invalid date range if 'startDateWords == "Invalid Date" || endDateWords == "Invalid Date' triggered in api.js after 'Get data' button clicked-->
-        <div id="invaliddaterange" class="hidden" aria-live="assertive" aria-atomic="true" aria-relevant="additions" style="padding-top:15px">
-            <p><i class="fas fa-exclamation-triangle" style="padding-right:15px"></i><span data-i18n="Opps2"></span></p>
+            <p><span class="glyphicon glyphicon-exclamation-sign" style="padding-right:10px"></span><span data-i18n="Opps"></span></p>
         </div>
         <div id="error" class="hidden" aria-live="assertive" aria-atomic="true" aria-relevant="additions" style="padding-top:15px">
-            <p><i class="fas fa-exclamation-triangle" style="padding-right:15px"></i><span class="error_display" data-i18n="errorOccured"></span></p>
+            <p><span class="glyphicon glyphicon-exclamation-sign" style="padding-right:10px"></span><span class="error_display" data-i18n="errorOccured"></span></p>
 
             <details id="error-canvas">
                 <summary data-i18n="moreDetails"></summary>
@@ -869,7 +865,7 @@
                 -->
                 </div>
             </div>
-            <p id="moreDetailedAnalysis"><span class="glyphicon glyphicon-exclamation-sign"></span><span data-i18n="[html]moreDetailedAnalysis"></span></p>
+            <p id="moreDetailedAnalysis"><span class="glyphicon glyphicon-exclamation-sign" style="padding-right:15px"></span><span data-i18n="[html]moreDetailedAnalysis"></span></p>
         </div>
 
 <section id="uniquev_content_modal" class="modal-dialog modal-content overlay-def mfp-hide">
@@ -1014,7 +1010,7 @@
             <script>
                 var defPreFooter = document.getElementById("def-preFooter");
                 defPreFooter.outerHTML = wet.builder.preFooter({
-                    "dateModified": "2023-05-23",
+                    "dateModified": "2023-06-14",
                         "showShare": false,
                         "showFeedback" : false
                 });
