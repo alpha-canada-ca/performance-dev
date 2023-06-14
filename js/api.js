@@ -677,7 +677,7 @@ const jsonTrendGenerate = (json, dates, oRange) => {
         $("#trends-canvas").append("<canvas id='trends'></canvas>")
 
         var keys = Object.keys(rows);
-            var arr = [];
+            var arr = []; // arr is an array that contains both the current and previous year data, plus garbage data for days that fall just outside the user's range
             for(var i=0; i<keys.length; i++){
                 var key = keys[i];
                 arr.push( rows[key]['data'] )
@@ -687,12 +687,11 @@ const jsonTrendGenerate = (json, dates, oRange) => {
         $cnt = arr.length
         console.log("cnt is " + $cnt);
         console.log("arr is " + arr);
+        
         val = arr.slice(0, $endDateIndex+1); // current year data: start of the array - the end date index
-        lval = arr.slice($cnt / 2, $cnt); // previous year data: the second half of the array - the end of the array
-        console.log("lval before " + lval)
-
-        val = val.slice(-oRange); // the relevant slice of val is the last oRange elements
-        lval = lval.slice(-oRange); // the relevant slice of lval is the last oRange elements
+        val = val.slice(-oRange); // current year data: the last oRange elements of val
+        lval = arr.slice(-oRange); // previous year data: the last oRange elements of arr
+        
         console.log("val after " + val)
         console.log("lval after " + lval)
 
