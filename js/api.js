@@ -650,11 +650,27 @@ const RANGE = (a, b) => Array.from((function*(x, y) {
 // Year-over-year comparison of visits table
 // dates[0] = start date, dates[1] = end date, oRange = number of days in the range
 const jsonTrendGenerate = (json, dates, oRange) => {
+    // convert dates[1] from format '2023-06-08' into format 'June 8, 2023'
+    var datesEndReformat = moment(dates[1]).format("MMMM D, YYYY");
+    // console.log("dates[1] is " + dates[1]);
+    // console.log("datesEndReformat is " + datesEndReformat);
+
     // add 1 day to dates[1]
     // this fixes a bug where the enddate is labelled as undefined in 'Visits for current year and previous year - Table'
     dates[1] = moment(dates[1]).add(1, 'days').format("YYYY-MM-DD");
 
     var rows = json['rows'];
+
+    // loop thru each row in rows
+    $endDateIndex = 0;
+    for(let i = 0; i < rows.length; i++) {
+        if(datesEndReformat == rows[i]['value']) { // find the index of the end date in the json
+            $endDateIndex = i;
+            break;
+        }
+    }
+
+    // console.log("endDateIndex is " + $endDateIndex);
 
     if (rows != null) {
         $("#trends").remove()
@@ -671,13 +687,12 @@ const jsonTrendGenerate = (json, dates, oRange) => {
         $cnt = arr.length
         console.log("cnt is " + $cnt);
         console.log("arr is " + arr);
-        val = arr.slice(0, $cnt / 2); // the first half of the array stores the current year's data
-        lval = arr.slice($cnt / 2, $cnt); // the second half of the array stores the previous year's data
-        console.log("val before " + val)
+        val = arr.slice(0, $endDateIndex+1); // current year data: start of the array - the end date index
+        lval = arr.slice($cnt / 2, $cnt); // previous year data: the second half of the array - the end of the array
         console.log("lval before " + lval)
 
-        val = val.slice(-oRange);
-        lval = lval.slice(-oRange);
+        val = val.slice(-oRange); // the relevant slice of val is the last oRange elements
+        lval = lval.slice(-oRange); // the relevant slice of lval is the last oRange elements
         console.log("val after " + val)
         console.log("lval after " + lval)
 

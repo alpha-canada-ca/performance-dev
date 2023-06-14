@@ -359,21 +359,30 @@
                 <!-- calendar date picker for startdate -->
                 <div class="form-group">
                     <label for="startdate" class="required"><span class="field-name" data-i18n="select-startdate"></span> <strong class="required" data-i18n="Required"></strong></label>
-                    <input class="form-control" type="date" id="startdate" name="startdate" required="required"/>
+                    <input class="form-control" type="date" id="startdate" name="startdate" min="" required="required"/>
                 </div>
                 <script>startdate.max = new Date().toISOString().split("T")[0];</script>
 
                 <!-- calendar date picker for enddate -->
                 <div class="form-group">
                     <label for="enddate" class="required"><span class="field-name" data-i18n="select-enddate"></span> <strong class="required" data-i18n="Required"></strong></label>
-                    <input class="form-control" type="date" id="enddate" name="enddate" required="required"/>
+                    <input class="form-control" type="date" id="enddate" name="enddate" min="" required="required"/>
                 </div>
                 <script>enddate.max = new Date().toISOString().split("T")[0];</script>
                 <script>
+                    // Get the current date
+                    var threeYearsAgo = new Date();
+                    // Subtract 3 years from the current date
+                    threeYearsAgo.setFullYear(threeYearsAgo.getFullYear() - 3);
+                    // Format the date as YYYY-MM-DD
+                    var formattedThreeYearsAgo = threeYearsAgo.toISOString().slice(0, 10);
+                    // Set the minimum value of the calendar input fields to the formatted date so that users cannot select a date that is more than 3 years ago, since AA data is only available for the past 3 years
+                    document.getElementById('startdate').setAttribute('min', formattedThreeYearsAgo);
+                    document.getElementById('enddate').setAttribute('min', formattedThreeYearsAgo);
+
                     // Get the start date and end date input elements
                     var startdateInput = document.getElementById("startdate");
                     var enddateInput = document.getElementById("enddate");
-
                     // prevent the user from setting an invalid date range, such as an enddate that is before the startdate
                     startdateInput.addEventListener("input", function() {
                         enddateInput.min = startdateInput.value;
@@ -430,7 +439,7 @@
                 <div class="col-md-12">
                     <h2><span class="wb-inv" data-i18n="Datafor"></span><span id="h2title" data-i18n="Page-levelstatistics"></span></h2>
                     <span id="urlStatic" class="small" aria-hidden="true"></span>
-                    <p class="small"><a id="h2href" href="#" data-i18n="LanguageToggle"></a></p>
+                    <p class="small"><a id="h2href" href="#" data-i18n="LanguageToggle"></a></p> <!-- link to view analytics for equivalent FR/EN page, if it is a canada.ca url -->
                     <p id="urlLang" class="hidden"></p>
                 </div>
 
