@@ -51,7 +51,240 @@
             <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" /> <!-- broken -->
          </noscript>
     <!-- load css stylesheet -->
-    <link rel="stylesheet" href="style.css" />
+    <!-- <link rel="stylesheet" href="style.css" /> -->
+    <style>
+        canvas {
+            padding: 1em;
+            border: 1px solid lightgrey;
+        }
+
+        html {
+            font-family: sans-serif;
+            -ms-text-size-adjust: 100%;
+            -webkit-text-size-adjust: 100%
+        }
+
+        p.h2 sup {
+            font-size: 16px;
+        }
+        div.small {
+            line-height: 1.2em !important;
+        }
+        /* Dropdown 
+        
+        .dropdown {
+            display: inline-block;
+            position: relative;
+            color: #333;
+            font-family: Sans-Serif;
+            background-color: #f6f6f6;
+        }
+        
+        .dd-button {
+            display: inline-block;
+            border: 1px solid gray;
+            border-radius: 4px;
+            padding: 5px 30px 5px 20px;
+            background-color: #ffffff;
+            cursor: pointer;
+            white-space: nowrap;
+            z-index: 999;
+            font-size: 16px;
+            font-weight: 100;
+        }
+        
+        .dd-button::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: 15px;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 5px solid black;
+        }
+        
+        .dd-button:hover {
+            background-color: #eeeeee;
+        }
+        
+        .dd-input {
+            display: none;
+        }
+        
+        .dd-menu {
+            position: absolute;
+            top: 100%;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 0;
+            margin: 2px 0 0 0;
+            box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.1);
+            background-color: #ffffff;
+            list-style-type: none;
+            z-index: 9;
+            font-size: 16px;
+            font-weight: 100;
+        }
+        
+        .dd-input+.dd-menu {
+            display: none;
+        }
+        
+        .dd-input:checked+.dd-menu {
+            display: block;
+        }
+        
+        .dd-menu li {
+            padding: 10px 20px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .dd-menu li:hover {
+            background-color: #f6f6f6;
+        }
+        
+        .dd-menu li a {
+            display: block;
+            margin: -10px -20px;
+            padding: 5px 20px;
+        }
+        
+        .dd-menu li.divider {
+            padding: 0;
+            border-bottom: 1px solid #cccccc;
+        }
+        */
+
+        .bg {
+            background-color: #cfe8ef !important;
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .bg-success-c {
+            background-color: #4285f4 !important;
+        }
+
+        .bg-info-c {
+            background-color: #5e35b1 !important;
+        }
+
+        .bg-warning-c {
+            background-color: #18897b !important;
+        }
+
+        .bg-danger-c {
+            background-color: #e8710a !important;
+        }
+
+        .bg-white-color {
+            color: #FFF !important;
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .bg-black-color {
+            color: #000 !important;
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .gsc-chart-container {
+            position: relative;
+            height: 60vh;
+        }
+
+        .fa-question-circle {
+            color: #444;
+        }
+
+        .fa-question-circle:hover {
+            color: #000;
+        }
+
+        .fas-1 {
+            font-size:16px;
+        }
+
+        #qwert {
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+        }
+        button#searchBttn.btn.btn-default span {
+            white-space: inherit;
+        }
+
+        button.btn {
+            white-space: inherit;
+        }
+
+        button.black {
+          background-color: #444444; /* Green */
+          border: none;
+          color: white;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          cursor: pointer;
+          font-size: 8px;
+          padding: 3px 4px;
+          border-radius: 50%;
+        }
+
+        button.black:hover {
+          background-color: #000000;
+        }
+
+        @media (min-width: 320px) and (max-width: 991px) {
+            .mobile-visible { display: block; margin-bottom: 15px; }
+            .desktop-visible { display: none; }  
+            /*
+            #dt-rng { margin-top: 0px; }
+            .dt-rng { width: 100%; }
+             #urlStatic { margin: 0 0 0 5px; } */
+        }
+
+        @media (min-width: 992px) {
+            .mobile-visible { display: none; }
+            .desktop-visible { display: block; }   
+            /*#dt-rng { margin-top: 38px; }
+            .dt-rng { width: 100%;}*/
+        }
+
+        .blue-box {
+            font-size: 17px;
+        }
+
+        #ajax-status-alert {
+            position: fixed;
+            bottom: 10px;
+            right: 15px;
+            z-index: 1001;
+        }
+
+        .ajax-status-alert__text + .ajax-status-alert__icon {
+            display: inline-block;
+            margin-left: 5px;
+        }
+
+        #date-range {
+            display: none; /* Hide the date range dropdown but do not delete the date range dropdown so that data-index will always be set to 2 in the background */
+        }
+
+        #canvas-container {
+            overflow-x: hidden;
+        }
+
+        .glyphicon {
+            cursor: pointer;
+        }
+
+        #moreDetailedAnalysis {
+            padding-top: 30px;
+
+        }
+    </style>
     <!-- Write closure template -->
     <script>
         //script.onreadystatechange = script.onload = null;
