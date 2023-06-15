@@ -397,7 +397,62 @@
 
         </form>
     </div>
+    
+        <!-- LOADING WHILE SEARCHING -->
+            <!--
+            <section id="loading-popup-modal" class="hidden">
+                <div id="popup-modal-overlay" class="modal"></div>
+                <div id="popup-modal" class="modal-dialog modal-content overlay-def">
+                    <header class="modal-header">
+                        <i class="fa-solid fa-circle-notch fa-spin"></i>
+                        <h2 class="modal-title">
+                            <i class="fa fa-spinner fa-spin fa-fw" style="font-size:24px"></i>
+                            <span id="loadGSC" aria-live="assertive" aria-atomic="true" aria-relevant="all"></span>
+                            <span id="loadAA" aria-live="polite" aria-atomic="true" aria-relevant="all"></span>
+                            <span id="loadFD" aria-live="polite" aria-atomic="true" aria-relevant="all"></span>
+                            <span id="loadComp" aria-live="assertive" aria-atomic="true" aria-relevant="all"></span>
+                        </h2>
+                    </header>
+                    <div class="modal-body">
+
+                        <p>We are working to get the data you requested. If it takes longer than a few minutes to load, please refresh the page and try again.</p>
+                        <hr>
+                        <p><b>While you are waiting, here’s a quick joke to pass the time...</b></p>
+                        <p><span id="quote"></span></p>
+                        -->
         
+                        <!-- QUOTE RANDOMIZER -->
+                        <!--
+                        <script>
+                            /*
+                            var quoteArray = new Array(5);
+                            var n = setTimeout(function(){
+                                var randomNumber = Math.round(Math.random()*(quoteArray.length-1));
+                                var quoteNumber = "quote" + randomNumber;
+                                console.log("quote number " + quoteNumber);
+                                $('#quote').attr("data-i18n", quoteNumber); 
+                                $(document).i18n();
+                            }, 1000);
+                            */
+                            var quote = [
+                                "Why did Hans Solo not enjoy his steak dinner? It was Chewie!", 
+                                "What do dentists call their x-rays? Tooth pics!", 
+                                "Why should you take a data scientist with you into the jungle? They can take care of Python problems.", 
+                                "How much data can be stored in a glacier? A frostbyte.",
+                                "Did you hear about the first restaurant to open on the moon? It had great food, but no atmosphere.",
+                                "When does a joke become a 'dad joke'? When it becomes apparent.",
+                                "What did one ocean say to the other ocean? Nothing, it just waved.",
+                                "What did the janitor say when he jumped out of the closet? Supplies!"
+                            ];
+                            var t = setTimeout(function(){
+                                var randomNumber = Math.round(Math.random()*(quote.length-1));
+                                $('#quote').html(quote[randomNumber]); 
+                            }, 1000);
+                        </script>
+                    </div>
+                </div>
+            </section>
+            -->
 
         <p id="loading" role="region" class="hidden" style="margin-top: 10px;">
             <i class="fa fa-spinner fa-spin fa-fw" style="font-size:24px"></i>

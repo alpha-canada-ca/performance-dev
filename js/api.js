@@ -2694,6 +2694,7 @@ const mainQueue = (url, start, end, lang) => {
     $("#whole-canvas").addClass("hidden");
     $("#notfound").addClass("hidden")
     hideError();
+    //$('#loading-popup-modal').removeClass("hidden");
     $("#loading").removeClass("hidden");
 
     $success = 0; // initial $success as 0, which is false, if success is still 0 after all the API calls, then display error message
@@ -3004,6 +3005,7 @@ const mainQueue = (url, start, end, lang) => {
                 }
 
                 if ( res ) {
+                    //$('#loading-popup-modal').addClass("hidden");
                     $("#loading").addClass("hidden");
                     $("#loadFD").empty();
                     $("#notfound").addClass("hidden");
@@ -3023,6 +3025,7 @@ const mainQueue = (url, start, end, lang) => {
                     $("#invaliddaterange").removeClass("hidden"); // display invalid date range error message
                 }*/
                 else {
+                    //$('#loading-popup-modal').addClass("hidden");
                     $("#loading").addClass("hidden");
                     $("#loadFD").empty();
                     hideError();
@@ -3078,6 +3081,7 @@ const mainQueue = (url, start, end, lang) => {
     
     // display error message notfound if $success is still 0 after all the API calls
     if (!$success) {
+        //$("#loading-popup-modal").addClass("hidden");
         $("#loading").addClass("hidden");
         // if url is not empty, display notfound error message
         // if url is empty, no need for notfound error message because other error message already displayed
