@@ -19,9 +19,6 @@
     <meta name="dcterms.accessRights" content="2"/>
     <meta property="dcterms.service" content="CRA-ARC_Page-Analytics-Tool"/>
 
-    <!-- load css stylesheet -->
-    <link rel="stylesheet" type="text/css" href="css/style.css" />
-
     <!-- Load closure template scripts -->
     <script src="https://www.canada.ca/etc/designs/canada/cdts/gcweb/rn/cdts/compiled/soyutils.js"></script>
     <script src="https://unpkg.com/@popperjs/core@2"></script>
@@ -49,10 +46,13 @@
         
         document.write(inlineScript.outerHTML);
     </script>
+    
+    <link rel="stylesheet" type="text/css" href="assets/style.css" /> <!-- load local stylesheet -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> <!-- load font awesome stylesheet -->
+
     <noscript>
-            <link rel="stylesheet" href="gcweb/wet-boew/css/noscript.min.css" />
-            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" /> <!-- broken -->
-         </noscript>
+        <link rel="stylesheet" href="gcweb/wet-boew/css/noscript.min.css" /> <!--  load web experience toolkit stylesheet -->
+    </noscript>
     
     <!-- Write closure template -->
     <script>
