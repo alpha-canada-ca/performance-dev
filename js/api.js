@@ -651,7 +651,7 @@ const RANGE = (a, b) => Array.from((function*(x, y) {
 // dates[0] = start date, dates[1] = end date, oRange = number of days in the range
 const jsonTrendGenerate = (json, dates, oRange) => {
     // convert dates[1] from format '2023-06-08' into format 'June 8, 2023'
-    var datesEndReformat = moment(dates[1]).format("MMMM D, YYYY");
+    var datesEndReformat = moment(dates[1]).format("MMM D, YYYY");
     // console.log("dates[1] is " + dates[1]);
     // console.log("datesEndReformat is " + datesEndReformat);
 
