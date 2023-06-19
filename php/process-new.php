@@ -39,8 +39,8 @@ try {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $d = json_decode(file_get_contents('php://input'));
         $url = $d->oUrl;
-        $range = $d->oRange;
-        $endDate = $d->oEndDate;
+        $rangeStartToEnd = $d->oRangeStartToEnd; // the number of days between the start date and end date
+        $rangeEndToToday = $d->oRangeEndToToday; // the number of days between the end date and today
         $date = $d->dates;
         $start = $date[0];
         $end = $date[1];
@@ -48,8 +48,8 @@ try {
         $dbAccess = "search";
     } else if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         $url = $_REQUEST["url"];
-        $range = $_REQUEST["range"];
-        $endDate = $_REQUEST["oEndDate"];
+        $rangeStartToEnd = $_REQUEST["rangeStartToEnd"];
+        $rangeEndToToday = $_REQUEST["rangeEndToToday"];
         $start = $_REQUEST["start"];
         $end = $_REQUEST["end"];
         $oLang = $_REQUEST["lang"];
@@ -63,26 +63,18 @@ try {
     if ((isset($start) && !empty($start)) && (isset($end) && !empty($end))) {
         $iso = 'Y-m-d\TH:i:s.v';
 
-        $today = new DateTime("today");
-        // $today = $today->modify('-3 day');
-        // modify $today by subtracting the $endDate value
-        $today = $today->modify('-' . $endDate . ' day');
-        // $today = $today->modify('-' . $range . ' day');
+        $today = new DateTime("today"); // set $today to today
+        $today = $today->modify('-' . $rangeEndToToday . ' day'); // move back $today to the user selected end date
         $end = $today->format($iso);
 
-        /*
-        $yesterday = $today->modify('-6 day')
+        // move back $yesterday to the user selected start date
+        $yesterday = $today->modify('-' . $rangeStartToEnd . ' day')
         ->format($iso);
-        $week = $today->modify('-6 day')
+        // $week is a garbage value x2 the range of yesterday
+        $week = $today->modify('-' . $rangeStartToEnd . ' day')
         ->format($iso);
-        $month = $today->modify('-6 day')
-        ->format($iso);*/
-
-        $yesterday = $today->modify('-' . $range . ' day')
-        ->format($iso);
-        $week = $today->modify('-' . $range . ' day')
-        ->format($iso);
-        $month = $today->modify('-' . $range . ' day')
+        // $month is a garbage value x3 the range of yesterday
+        $month = $today->modify('-' . $rangeStartToEnd . ' day')
         ->format($iso);
 
         $dates2 = [$month, $week, $yesterday];

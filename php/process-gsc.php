@@ -36,11 +36,11 @@ $date = [ "7daysago", "yesterday" ];
 $lang = "en";
 */
 
-$range = $d->oRange; // the range between the start date and end date
-$endDate = $d->oEndDate; // the range between the end date and today
+$rangeStartToEnd = $d->oRangeStartToEnd; // the range between the start date and end date
+$rangeEndToToday = $d->oRangeEndToToday; // the range between the end date and today
 $days = $d->day;
 $date = $d->dates;
-$date = [ ( $range + $endDate . "daysago" ), ( $endDate + 1 . "daysago" ) ]; // [start, end]
+$date = [ ( $rangeStartToEnd + $rangeEndToToday . "daysago" ), ( $rangeEndToToday + 1 . "daysago" ) ]; // [start date, end date]
 $url = $d->oUrl;
 $start = $date[0];
 $end = $date[1];

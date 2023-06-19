@@ -2710,8 +2710,8 @@ const apiCall = (d, i, a, uu, dd, fld, lg, r, e) =>
       oUrl: uu,
       field: fld,
       lang: lg,
-      oRange: r,
-      oEndDate: e,
+      oRangeStartToEnd: r,
+      oRangeEndToToday: e,
     };
 
     let request = new Request(url, {
@@ -2782,7 +2782,14 @@ const apiCall2 = (d, i, a, uu, lg, r, e) =>
   a.map((type) => {
     url = "php/process-new.php";
 
-    post = { dates: d, url: i, oUrl: uu, lang: lg, oRange: r, oEndDate: e };
+    post = {
+      dates: d,
+      url: i,
+      oUrl: uu,
+      lang: lg,
+      oRangeStartToEnd: r,
+      oRangeEndToToday: e,
+    };
 
     let request = new Request(url, {
       method: "POST",
@@ -2816,8 +2823,8 @@ const apiCallGSC2 = (d, i, a, uu, dd, lg, r, e) =>
       oUrl: uu,
       day: dd,
       lang: lg,
-      oRange: r,
-      oEndDate: e,
+      oRangeStartToEnd: r,
+      oRangeEndToToday: e,
     };
 
     let request = new Request(url, {
