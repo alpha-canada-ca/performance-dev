@@ -967,12 +967,13 @@ const getPageTitle = (a) =>
   Object.keys(a).map((key, index) => {
     var url = a[key]["value"];
     url = url.indexOf("https://") !== -1 ? url : "https://" + url;
+    // if url contains "canada.ca"
     if (url.indexOf("canada.ca") !== -1) {
-      let request = new Request(url, { method: "GET" });
+      let request = new Request(url, { method: "GET" }); // create a new request object as a GET request to url
       return fetch(request)
-        .then((res) => res.text())
-        .then((res) => $(res).find("h1:first").text())
-        .catch(console.error.bind(console));
+        .then((res) => res.text()) // fetch the contents of the url
+        .then((res) => $(res).find("h1:first").text()) // extracts the text of the first h1 tag on that url page
+        .catch(console.error.bind(console)); // log any errors to the console
     }
   });
 
@@ -990,6 +991,7 @@ const getPageH1 = (url) => {
 
 const getPage = (url) => {
   url = url.indexOf("https://") !== -1 ? url : "https://" + url;
+  // if url contains "canada.ca"
   if (url.indexOf("canada.ca") !== -1) {
     let request = new Request(url, { method: "GET" });
     return fetch(request)
@@ -3536,15 +3538,15 @@ const mainQueue = (url, start, end, lang) => {
           setQueryParams(oUrl, date);
           $("#loadComp").empty();
 
-          // if not canada.ca site, remove these sections from the page
+          // if not canada.ca site, hide these sections from the page
           if (!url.includes("www.canada.ca")) {
             // 👉️ substring is contained in string
-            $("#srchA-container").addClass("hidden");
-            $("#snum-container").addClass("hidden");
-            $("#search-container").addClass("hidden");
-            $("#h2href").addClass("hidden");
-            $("#details-panel2").addClass("hidden");
-            $("#details-panel2-lnk").closest("li").addClass("hidden");
+            $("#srchA-container").addClass("hidden"); // Canada.ca site search terms leading to this page
+            $("#snum-container").addClass("hidden"); // Canada.ca site searches started from this page
+            $("#search-container").addClass("hidden"); // does not exist
+            $("#h2href").addClass("hidden"); // View data for the equivalent French page
+            $("#details-panel2").addClass("hidden"); // Google Search analytics tab
+            $("#details-panel2-lnk").closest("li").addClass("hidden"); // Google Search analytics
           }
 
           $("#canvas-container").removeClass("hidden");

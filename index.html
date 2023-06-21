@@ -129,14 +129,28 @@
                 </select>
                 <!-- calendar date picker for startdate -->
                 <div class="form-group">
-                    <label for="startdate" class="required"><span class="field-name" data-i18n="select-startdate"></span> <strong class="required" data-i18n="Required"></strong></label>
+                    <label for="startdate" class="required">
+                        <span class="field-name" data-i18n="select-startdate"></span> 
+                        <strong class="required" data-i18n="Required"></strong>
+                        <sup>
+                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true" onclick="openOverlay('date_content_modal')"></span>
+                            <span class="wb-inv" data-i18n="hlp-three-years-ago-title"></span>
+                        </sup>
+                    </label>
                     <input class="form-control" type="date" id="startdate" name="startdate" min="" required="required"/>
                 </div>
                 <script>startdate.max = new Date().toISOString().split("T")[0];</script>
 
                 <!-- calendar date picker for enddate -->
                 <div class="form-group">
-                    <label for="enddate" class="required"><span class="field-name" data-i18n="select-enddate"></span> <strong class="required" data-i18n="Required"></strong></label>
+                    <label for="enddate" class="required">
+                        <span class="field-name" data-i18n="select-enddate"></span> 
+                        <strong class="required" data-i18n="Required"></strong>
+                        <sup>
+                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true" onclick="openOverlay('date_content_modal')"></span>
+                            <span class="wb-inv" data-i18n="hlp-three-years-ago-title"></span>
+                        </sup>
+                    </label>
                     <input class="form-control" type="date" id="enddate" name="enddate" min="" required="required"/>
                 </div>
                 <script>enddate.max = new Date().toISOString().split("T")[0];</script>
@@ -829,6 +843,15 @@
         <h2 class="modal-title" data-i18n="hlp-position-title"></h2>
     </header>
     <div class="modal-body" data-i18n="hlp-position"></div>
+</section>
+<section id="date_content_modal" class="mfp-hide modal-dialog modal-content overlay-def">
+    <!-- no header needed -->
+    <!--
+    <header class="modal-header">
+        <h2 class="modal-title" data-i18n="hlp-three-years-ago-title"></h2>
+    </header>
+    -->
+    <div class="modal-body" data-i18n="hlp-three"></div>
 </section>
 
 

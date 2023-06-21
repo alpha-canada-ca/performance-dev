@@ -135,6 +135,7 @@
     "hlp-search-terms-lead-title": "Définition pour le terme ' Termes de recherche de Canada.ca menant à cette page '",
     "hlp-users-click": "Les liens sur lesquels les visiteurs ont cliqué sur la page.",
     "hlp-users-click-title": "Définition pour le terme ' Clics des visiteurs '",
+    "hlp-three": "Seules les dates remontant jusqu'à 3 ans peuvent être sélectionnées, car les données datant de plus de 3 ans sont automatiquement supprimées.",
     "hlp-trends": "Le nombre de visites quotidiennes de la page cette année comparativement à l’année dernière.",
     "hlp-trends-title": "Définition pour le terme ' Tendance des visites '",
     "hlp-device-used": "Le type d’appareil (ordinateur, mobile ou tablette) qu’un visiteur a utilisé pour accéder à la page.",
