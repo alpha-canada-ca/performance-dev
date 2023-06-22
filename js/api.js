@@ -3219,11 +3219,15 @@ const mainQueue = (url, start, end, lang) => {
 
     console.log(d);
 
-    var localLocaleStart = moment(vStart);
-    var localLocaleEnd = moment(vEnd);
+    var localLocaleStart = moment(vStart2);
+    var localLocaleEnd = moment(vEnd2);
 
+    // display the date in either English or French depending on the language selected
     localLocaleStart.locale(document.documentElement.lang);
     localLocaleEnd.locale(document.documentElement.lang);
+
+    startDateWords = localLocaleStart.format("dddd MMMM DD, YYYY");
+    endDateWords = localLocaleEnd.format("dddd MMMM DD, YYYY");
 
     // display the start date and end date in words in index.html
     $("#fromdaterange").html("<strong>" + startDateWords + "</strong>");
