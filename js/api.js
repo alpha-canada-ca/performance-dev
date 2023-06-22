@@ -859,6 +859,7 @@ const jsonTrendGenerate = (json, dates, oRange) => {
       data: {
         labels: valVar,
         datasets: [
+          // the current year graph
           {
             label: $.i18n("CurrentYear"),
             data: val,
@@ -866,13 +867,14 @@ const jsonTrendGenerate = (json, dates, oRange) => {
             backgroundColor: "#56B4E9",
             fill: false,
           },
-          {
+          // the previous year graph
+          /* {
             label: $.i18n("PreviousYear"),
             data: lval,
             borderColor: "#009E73",
             backgroundColor: "#009E73",
             fill: false,
-          },
+          },*/
         ],
       },
       options: options,
@@ -903,9 +905,9 @@ const jsonTrendGenerate = (json, dates, oRange) => {
       lvals = lval[index].toLocaleString(document.documentElement.lang + "-CA");
       var obj = {};
       obj[$.i18n(granularity)] = valVarLong[index];
-      obj[$.i18n("CurrentYear")] = vals;
-      obj[$.i18n("PreviousYear")] = lvals;
-      obj[$.i18n("Difference")] = diff;
+      obj[$.i18n("CurrentYear")] = vals; // the current year column in the table
+      // obj[$.i18n("PreviousYear")] = lvals; // the previous year column in the table
+      // obj[$.i18n("Difference")] = diff; // the difference column in the table
       srch.push(obj);
     });
 
@@ -2726,7 +2728,7 @@ const apiCall = (d, i, a, uu, dd, fld, lg, r, e) =>
       .then((res) => {
         //cnt++; $("#percent").html((cnt * 100 / aa).toFixed(1) + "%");
         console.log(type);
-        console.log(res);
+        console.log(res); // prints res parameter for each case in console as Object
         if (res["error"]) {
           return Promise.resolve(res);
         } else {
@@ -3242,6 +3244,7 @@ const mainQueue = (url, start, end, lang) => {
     $("#numDays").html(rangeStart2ToEnd2);
     $("#numWeeks").html(dWeek);
 
+    // if user does not select an invalid date range, then disable the search button to let user know that the search is in progress
     if (
       !(
         startDateWords == "Invalid Date" ||
