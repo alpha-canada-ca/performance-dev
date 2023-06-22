@@ -2853,6 +2853,7 @@ const apiCallGSC2 = (d, i, a, uu, dd, lg, r, e) =>
         $("#fromGSC").html(res["start"]);
         $("#toGSC").html(res["end"]);
 
+        // display the date in either English or French depending on the language selected
         localLocaleStart.locale(document.documentElement.lang);
         localLocaleEnd.locale(document.documentElement.lang);
 
@@ -2876,6 +2877,9 @@ const apiCallGSC2 = (d, i, a, uu, dd, lg, r, e) =>
             year: "numeric",
           })
           .replace(",", "");
+
+        startDateWords = localLocaleStart.format("dddd MMMM DD, YYYY");
+        endDateWords = localLocaleEnd.format("dddd MMMM DD, YYYY");
 
         $dd = $("#date-range").find(":selected").data("index");
         $("#fromdaterangegsc").html("<strong>" + startDateWords + "</strong>");
