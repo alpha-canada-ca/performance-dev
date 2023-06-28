@@ -750,7 +750,7 @@ const jsonTrendGenerate = (json, dates, oRange) => {
     for (var m = moment(dates[0]); m.isBefore(dates[1]); m.add(1, "days")) {
       valVar.push(m.locale(document.documentElement.lang).format("MMM-DD"));
       valVarLong.push(
-        m.locale(document.documentElement.lang).format("MMMM DD")
+        m.locale(document.documentElement.lang).format("MMM D, YYYY")
       );
     }
 
@@ -905,8 +905,8 @@ const jsonTrendGenerate = (json, dates, oRange) => {
       lvals = lval[index].toLocaleString(document.documentElement.lang + "-CA");
       var obj = {};
       obj[$.i18n(granularity)] = valVarLong[index];
-      obj[$.i18n("CurrentYear")] = vals; // the current year column in the table
-      // obj[$.i18n("PreviousYear")] = lvals; // the previous year column in the table
+      obj[$.i18n("CurrentYear")] = vals; // the current year visits column in the table
+      // obj[$.i18n("PreviousYear")] = lvals; // the previous year visits column in the table
       // obj[$.i18n("Difference")] = diff; // the difference column in the table
       srch.push(obj);
     });
