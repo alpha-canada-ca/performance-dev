@@ -750,7 +750,7 @@ const jsonTrendGenerate = (json, dates, oRange) => {
     for (var m = moment(dates[0]); m.isBefore(dates[1]); m.add(1, "days")) {
       valVar.push(m.locale(document.documentElement.lang).format("MMM-DD"));
       valVarLong.push(
-        m.locale(document.documentElement.lang).format("MMM D, YYYY")
+        m.locale(document.documentElement.lang).format("MMMM DD, YYYY")
       );
     }
 
