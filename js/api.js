@@ -693,13 +693,17 @@ var numberWithCommas = function (x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
 
-// Year-over-year comparison of visits table
+// Daily visits table
 // dates[0] = start date, dates[1] = end date, oRange = number of days in the range
 const jsonTrendGenerate = (json, dates, oRange) => {
   // convert dates[1] from format '2023-06-08' into format 'June 8, 2023'
   var datesEndReformat = moment(dates[1]).format("MMM D, YYYY");
   console.log("dates[1] is " + dates[1]);
   console.log("datesEndReformat is " + datesEndReformat);
+
+  // the day before datesEndReformat
+  var datesEndReformatPrev = moment(datesEndReformat).subtract(1, "days");
+  console.log("datesEndReformatPrev is " + datesEndReformatPrev);
 
   // add 1 day to dates[1]
   // this fixes a bug where the enddate is labelled as undefined in 'Visits for current year and previous year - Table'
@@ -710,6 +714,13 @@ const jsonTrendGenerate = (json, dates, oRange) => {
   // loop thru each row in rows
   $endDateIndex = 0;
   for (let i = 0; i < rows.length; i++) {
+    if (datesEndReformatPrev == rows[i]["value"]) {
+      // find the index of the day before the end date in the json
+      // this is a workaround for a bug where the api returns days up to the day before the end date, but not including the end date in the res variable
+      // the daily visits graph will return values: start date - day before end date
+      $endDateIndex = i;
+    }
+
     if (datesEndReformat == rows[i]["value"]) {
       // find the index of the end date in the json
       $endDateIndex = i;
