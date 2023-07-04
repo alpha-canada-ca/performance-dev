@@ -3128,8 +3128,8 @@ const mainQueue = (url, start, end, lang) => {
     })
     .replace(",", "");
 
-  console.log("startDateWords" + startDateWords);
-  console.log("endDateWords" + endDateWords);
+  console.log("startDateWords " + startDateWords);
+  console.log("endDateWords " + endDateWords);
 
   // Calculate the numerical date range between start2 and end2
   var rangeStart2ToEnd2 = moment(end2).diff(moment(start2), "days") + 1;
@@ -3144,14 +3144,21 @@ const mainQueue = (url, start, end, lang) => {
     "Numerical date range between end2 and today: " + rangeEnd2ToToday
   );
 
-  // if either the start date or end date is empty or invalid, or the date range is invalid, display error message
+  // find date 3 years ago today
+  var threeYearsAgo = moment().subtract(3, "years").format("YYYY-MM-DD");
+
   if (
-    startDateWords == "Invalid Date" ||
-    endDateWords == "Invalid Date" ||
-    rangeStart2ToEnd2 == "NaN" ||
-    rangeEnd2ToToday == "Nan"
+    startDateWords == "Invalid Date" || // if start date is empty or invalid
+    endDateWords == "Invalid Date" || // if end date is empty or invalid
+    rangeStart2ToEnd2 == "NaN" || // if the date range is invalid
+    rangeEnd2ToToday == "NaN" || // if the date range is invalid
+    rangeStart2ToEnd2 < 0 || // if the start date is after the end date
+    moment(vStart2).isBefore(threeYearsAgo) || // if the start date is before three years ago today
+    moment(vStart2).isAfter(moment()) || // if the start date is after today
+    moment(vEnd2).isBefore(threeYearsAgo) || // if the end date is before three years ago today
+    moment(vEnd2).isAfter(moment()) // if the end date is after today
   ) {
-    $("#loading").addClass("hidden");
+    $("#loading").addClass("hidden"); // hide results
     $("#loadFD").empty();
     $("#searchBttn").prop("disabled", false); // enable the search button so user can search again with a different date range
     // hideError();
@@ -3254,10 +3261,15 @@ const mainQueue = (url, start, end, lang) => {
 
     // if user does not select an invalid date range, then disable the search button to let user know that the search is in progress
     if (
-      startDateWords != "Invalid date" &&
+      startDateWords != "Invalid date" && // "Invalid Date" is transformed into "Invalid date" by moment.js
       endDateWords != "Invalid date" &&
       rangeStart2ToEnd2 != "NaN" &&
-      rangeEnd2ToToday != "NaN"
+      rangeEnd2ToToday != "NaN" &&
+      rangeStart2ToEnd2 >= 0 && // if the start date is before the end date
+      !moment(vStart2).isBefore(threeYearsAgo) && // if the start date is less than three years ago today
+      !moment(vStart2).isAfter(moment()) && // if the start date is not after today
+      !moment(vEnd2).isBefore(threeYearsAgo) && // if the end date is less than three years ago today
+      !moment(vEnd2).isAfter(moment()) // if the end date is not after today
     ) {
       $("#searchBttn").prop("disabled", true);
     }
