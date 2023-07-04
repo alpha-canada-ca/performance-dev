@@ -698,8 +698,8 @@ var numberWithCommas = function (x) {
 const jsonTrendGenerate = (json, dates, oRange) => {
   // convert dates[1] from format '2023-06-08' into format 'June 8, 2023'
   var datesEndReformat = moment(dates[1]).format("MMM D, YYYY");
-  // console.log("dates[1] is " + dates[1]);
-  // console.log("datesEndReformat is " + datesEndReformat);
+  console.log("dates[1] is " + dates[1]);
+  console.log("datesEndReformat is " + datesEndReformat);
 
   // add 1 day to dates[1]
   // this fixes a bug where the enddate is labelled as undefined in 'Visits for current year and previous year - Table'
@@ -717,7 +717,7 @@ const jsonTrendGenerate = (json, dates, oRange) => {
     }
   }
 
-  // console.log("endDateIndex is " + $endDateIndex);
+  console.log("endDateIndex is " + $endDateIndex);
 
   if (rows != null) {
     $("#trends").remove();
@@ -728,7 +728,7 @@ const jsonTrendGenerate = (json, dates, oRange) => {
     for (var i = 0; i < keys.length; i++) {
       var key = keys[i];
       arr.push(rows[key]["data"]);
-      console.log("pushed " + rows[key]["data"]);
+      // console.log("pushed " + rows[key]["data"]);
     }
 
     $cnt = arr.length;
@@ -3254,12 +3254,10 @@ const mainQueue = (url, start, end, lang) => {
 
     // if user does not select an invalid date range, then disable the search button to let user know that the search is in progress
     if (
-      !(
-        startDateWords == "Invalid Date" ||
-        endDateWords == "Invalid Date" ||
-        rangeStart2ToEnd2 == "NaN" ||
-        rangeEnd2ToToday == "Nan"
-      )
+      startDateWords != "Invalid date" &&
+      endDateWords != "Invalid date" &&
+      rangeStart2ToEnd2 != "NaN" &&
+      rangeEnd2ToToday != "NaN"
     ) {
       $("#searchBttn").prop("disabled", true);
     }
@@ -3529,13 +3527,19 @@ const mainQueue = (url, start, end, lang) => {
           $("#loadComp").html($.i18n("FetchdataComplete"));
           setQueryParams(oUrl, date);
           $("#loadComp").empty();
-        } /*else if ( startDateWords == "Invalid Date" || endDateWords == "Invalid Date" || rangeStart2ToEnd2 == "NaN" || rangeEnd2ToToday == "Nan" )  { // if either the start date or end date is empty
-                    $("#loading").addClass("hidden");
-                    $("#loadFD").empty();
-                    $("#searchBttn").prop("disabled", false);
-                    hideError();
-                    $("#invaliddaterange").removeClass("hidden"); // display invalid date range error message
-                }*/ else {
+        } /* else if (
+          startDateWords == "Invalid date" ||
+          endDateWords == "Invalid date" ||
+          rangeStart2ToEnd2 == "NaN" ||
+          rangeEnd2ToToday == "NaN"
+        ) {
+          // if either the start date or end date is empty
+          $("#loading").addClass("hidden");
+          $("#loadFD").empty();
+          $("#searchBttn").prop("disabled", false);
+          hideError();
+          $("#invaliddaterange").removeClass("hidden"); // display invalid date range error message
+        } */ else {
           //$('#loading-popup-modal').addClass("hidden");
           $("#loading").addClass("hidden");
           $("#loadFD").empty();
