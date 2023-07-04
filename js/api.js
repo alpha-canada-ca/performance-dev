@@ -702,7 +702,8 @@ const jsonTrendGenerate = (json, dates, oRange) => {
   console.log("datesEndReformat is " + datesEndReformat);
 
   // the day before datesEndReformat
-  var datesEndReformatPrev = moment(datesEndReformat).subtract(1, "days");
+  var datesEndReformatPrev = moment(dates[1]).subtract(1, "days");
+  datesEndReformatPrev = moment().format("MMM D, YYYY");
   console.log("datesEndReformatPrev is " + datesEndReformatPrev);
 
   // add 1 day to dates[1]
@@ -717,6 +718,8 @@ const jsonTrendGenerate = (json, dates, oRange) => {
     if (datesEndReformatPrev == rows[i]["value"]) {
       // find the index of the day before the end date in the json
       // this is a workaround for a bug where the api returns days up to the day before the end date, but not including the end date in the res variable
+      // this usually happens if the end date is today and the date range is large
+      // such as https://www.canada.ca/en/services/benefits/publicpensions.html, 2022-02-08 to 2023-07-04
       // the daily visits graph will return values: start date - day before end date
       $endDateIndex = i;
     }
@@ -3163,7 +3166,7 @@ const mainQueue = (url, start, end, lang) => {
     endDateWords == "Invalid Date" || // if end date is empty or invalid
     rangeStart2ToEnd2 == "NaN" || // if the date range is invalid
     rangeEnd2ToToday == "NaN" || // if the date range is invalid
-    rangeStart2ToEnd2 < 0 || // if the start date is after the end date
+    rangeStart2ToEnd2 <= 0 || // if the start date is after the end date
     moment(vStart2).isBefore(threeYearsAgo) || // if the start date is before three years ago today
     moment(vStart2).isAfter(moment()) || // if the start date is after today
     moment(vEnd2).isBefore(threeYearsAgo) || // if the end date is before three years ago today
@@ -3276,7 +3279,7 @@ const mainQueue = (url, start, end, lang) => {
       endDateWords != "Invalid date" &&
       rangeStart2ToEnd2 != "NaN" &&
       rangeEnd2ToToday != "NaN" &&
-      rangeStart2ToEnd2 >= 0 && // if the start date is before the end date
+      rangeStart2ToEnd2 > 0 && // if the start date is before the end date
       !moment(vStart2).isBefore(threeYearsAgo) && // if the start date is less than three years ago today
       !moment(vStart2).isAfter(moment()) && // if the start date is not after today
       !moment(vEnd2).isBefore(threeYearsAgo) && // if the end date is less than three years ago today
