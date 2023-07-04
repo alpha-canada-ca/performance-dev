@@ -703,7 +703,7 @@ const jsonTrendGenerate = (json, dates, oRange) => {
 
   // the day before datesEndReformat
   var datesEndReformatPrev = moment(dates[1]).subtract(1, "days");
-  datesEndReformatPrev = moment().format("MMM D, YYYY");
+  datesEndReformatPrev = moment(datesEndReformatPrev).format("MMM D, YYYY");
   console.log("datesEndReformatPrev is " + datesEndReformatPrev);
 
   // add 1 day to dates[1]
