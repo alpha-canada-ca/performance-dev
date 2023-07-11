@@ -3604,17 +3604,21 @@ const mainQueue = (url, start, end, lang) => {
           $("#ddDate").html($.i18n("Yesterday"));
         }
 
-        // if sameDay is true then hide the "to" date range becasue it is the same as the "from" date range
+        // if sameDay (the date range is a single day) is true then hide the "to" date range becasue it is the same as the "from" date range
         if (sameDay) {
           $("#todaterange").addClass("hidden");
           $("#to").addClass("hidden");
           $("#todaterangegsc").addClass("hidden");
           $("#gscto").addClass("hidden");
+          $("#chart-trnds").addClass("hidden"); // hide the daily visits graph in web analytics tab
+          $("#chartgsc").addClass("hidden"); // hide the daily visits graph in gsc tab
         } else {
           $("#todaterange").removeClass("hidden");
           $("#to").removeClass("hidden");
           $("#todaterangegsc").removeClass("hidden");
           $("#gscto").removeClass("hidden");
+          $("#chart-trnds").removeClass("hidden");
+          $("#chartgsc").removeClass("hidden");
         }
       })
       .catch(console.error.bind(console));
