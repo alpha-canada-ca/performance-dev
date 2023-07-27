@@ -763,9 +763,19 @@ const jsonTrendGenerate = (json, dates, oRange) => {
 
     for (var m = moment(dates[0]); m.isBefore(dates[1]); m.add(1, "days")) {
       valVar.push(m.locale(document.documentElement.lang).format("MMM-DD"));
-      valVarLong.push(
-        m.locale(document.documentElement.lang).format("MMMM DD, YYYY")
-      );
+
+      // if English language is selected
+      if (document.documentElement.lang == "en") {
+        valVarLong.push(
+          m.locale(document.documentElement.lang).format("MMMM DD, YYYY")
+        );
+      }
+      // else if French language is selected
+      else {
+        valVarLong.push(
+          m.locale(document.documentElement.lang).format("DD MMMM YYYY")
+        );
+      }
     }
 
     //console.log(val)
@@ -2189,7 +2199,7 @@ const jsonMetrics = (json, day) => {
       ["Prince Edward Island||Île-du-Prince-Édouard", provPEI],
       ["Quebec||Le Québec", provQB],
       ["Saskatchewan||La Saskatchewan", provSK],
-      ["Yukon (Territory)||Le Yukon (Territoire)", provYK],
+      ["Yukon||Le Yukon", provYK],
     ];
 
     jsonTable(provArray, provVal, provTitle, provHeaders, day);
@@ -2339,9 +2349,20 @@ const jsonGSCGenerate = (json, day) => {
       var $date = moment(val["keys"][0])
         .locale(document.documentElement.lang)
         .format("MMM-DD");
-      var $dateLong = moment(val["keys"][0])
-        .locale(document.documentElement.lang)
-        .format("MMMM DD, YYYY");
+
+      // if English language is selected
+      if (document.documentElement.lang == "en") {
+        var $dateLong = moment(val["keys"][0])
+          .locale(document.documentElement.lang)
+          .format("MMMM DD, YYYY"); // EN format
+      }
+      // else if French language is selected
+      else {
+        var $dateLong = moment(val["keys"][0])
+          .locale(document.documentElement.lang)
+          .format("DD MMMM YYYY"); // FR format
+      }
+
       keys.push($date);
 
       var obj = {};
@@ -2895,9 +2916,15 @@ const apiCallGSC2 = (d, i, a, uu, dd, lg, r, e) =>
         startDateWords = localLocaleStart.format("dddd MMMM DD, YYYY");
         endDateWords = localLocaleEnd.format("dddd MMMM DD, YYYY");
 
+        // if French language is selected, change format to standard French formatting
+        if (document.documentElement.lang == "fr") {
+          startDateWords = localLocaleStart.format("dddd DD MMMM YYYY");
+          endDateWords = localLocaleEnd.format("dddd DD MMMM YYYY");
+        }
+
         $dd = $("#date-range").find(":selected").data("index");
-        $("#fromdaterangegsc").html("<strong>" + startDateWords + "</strong>");
-        $("#todaterangegsc").html("<strong>" + endDateWords + "</strong>");
+        $("#fromdaterangegsc").html(startDateWords);
+        $("#todaterangegsc").html(endDateWords);
 
         $("#numDaysgsc").html(diff);
 
@@ -3108,6 +3135,35 @@ const mainQueue = (url, start, end, lang) => {
   //$('#loading-popup-modal').removeClass("hidden");
   $("#loading").removeClass("hidden");
 
+  // table of contents anchor link localization
+  if (document.documentElement.lang == "fr") {
+    // if French language is selected
+    $("#table-of-contents-french").removeClass("hidden");
+    $("#mesures-clés").removeClass("hidden");
+    $("#sources-de-trafic").removeClass("hidden");
+    $("#profil-du-visiteur").removeClass("hidden");
+    $("#activité-de-visiteur").removeClass("hidden");
+
+    $("#table-of-contents-english").addClass("hidden");
+    $("#key-metrics").addClass("hidden");
+    $("#traffic-sources").addClass("hidden");
+    $("#visitor-profile").addClass("hidden");
+    $("#visitor-activity").addClass("hidden");
+  } else {
+    // if English language is selected
+    $("#table-of-contents-french").addClass("hidden");
+    $("#mesures-clés").addClass("hidden");
+    $("#sources-de-trafic").addClass("hidden");
+    $("#profil-du-visiteur").addClass("hidden");
+    $("#activité-de-visiteur").addClass("hidden");
+
+    $("#table-of-contents-english").removeClass("hidden");
+    $("#key-metrics").removeClass("hidden");
+    $("#traffic-sources").removeClass("hidden");
+    $("#visitor-profile").removeClass("hidden");
+    $("#visitor-activity").removeClass("hidden");
+  }
+
   $success = 0; // initial $success as 0, which is false, if success is still 0 after all the API calls, then display error message
 
   console.log(url);
@@ -3254,9 +3310,15 @@ const mainQueue = (url, start, end, lang) => {
     startDateWords = localLocaleStart.format("dddd MMMM DD, YYYY");
     endDateWords = localLocaleEnd.format("dddd MMMM DD, YYYY");
 
+    // if French language is selected, change format to standard French formatting
+    if (document.documentElement.lang == "fr") {
+      startDateWords = localLocaleStart.format("dddd DD MMMM YYYY");
+      endDateWords = localLocaleEnd.format("dddd DD MMMM YYYY");
+    }
+
     // display the start date and end date in words in index.html
-    $("#fromdaterange").html("<strong>" + startDateWords + "</strong>");
-    $("#todaterange").html("<strong>" + endDateWords + "</strong>");
+    $("#fromdaterange").html(startDateWords);
+    $("#todaterange").html(endDateWords);
 
     var start = moment(vStart);
     var end = moment(vEnd);
