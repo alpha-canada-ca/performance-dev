@@ -1090,7 +1090,7 @@ const jsonPrevious = (json, day) => {
     if (ref.length != 0) {
       //res.sort((a, b)=> b[$.i18n("Visits")] - a[$.i18n("Visits")]);
 
-      $(val).html(getTable(5, "false"));
+      $(val).html(getTable(10, "false")); // by default, show 10 rows per page
       let table = document.querySelector(val + " table");
       let data = Object.keys(ref[0]);
       generateTable(table, ref);
@@ -1492,7 +1492,13 @@ const jsonTable = (json, val, title, headers, day) => {
             $(val).trigger("wb-init.wb-tables");
             */
 
-    $(val).html(getTable(10, "false", "false", "false"));
+    // if generating the provChart table, don't paginate unless over 15 rows
+    if (val == "#provChart") {
+      $(val).html(getTable(15, "false", "false", "false"));
+    } else {
+      $(val).html(getTable(10, "false", "false", "false"));
+    }
+
     let table = document.querySelector(val + " table");
     let data = Object.keys(ref[0]);
     generateTable(table, ref);
@@ -2269,11 +2275,11 @@ const jsonGSCTotal = (json, day) => {
       var sameDay = moment(startDateGSC).isSame(moment(endDateGSC), "day");
 
       if (sameDay) {
-        // if startDateGSC and endDateGSC are the same day, do not display averages for clicks and impressions on the Google Search analytics tab
+        // if startDateGSC and endDateGSC are the same day, do not display averages for clicks and impressions on the Google search analytics tab
         $clicks.prepend("<span class='h2'>" + fClicks + "</span>");
         $imp.prepend("<span class='h2'>" + fImp + "</span>");
       } else {
-        // otherwise display the daily averages for clicks and impressions on the Google Search analytics tab
+        // otherwise display the daily averages for clicks and impressions on the Google search analytics tab
         $clicks.prepend(
           "<span class='h2'>" +
             fClicks +
@@ -3648,8 +3654,8 @@ const mainQueue = (url, start, end, lang) => {
             $("#snum-container").addClass("hidden"); // Canada.ca site searches started from this page
             $("#search-container").addClass("hidden"); // does not exist
             $("#h2href").addClass("hidden"); // View data for the equivalent French page
-            $("#details-panel2").addClass("hidden"); // Google Search analytics tab
-            $("#details-panel2-lnk").closest("li").addClass("hidden"); // Google Search analytics
+            $("#details-panel2").addClass("hidden"); // Google search analytics tab
+            $("#details-panel2-lnk").closest("li").addClass("hidden"); // Google search analytics
           }
 
           $("#canvas-container").removeClass("hidden");

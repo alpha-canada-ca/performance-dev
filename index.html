@@ -133,7 +133,7 @@
                         <span class="field-name" data-i18n="select-startdate"></span> 
                         <strong class="required" data-i18n="Required"></strong>
                         <sup>
-                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true" onclick="openOverlay('date_content_modal')"></span>
+                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true" onclick="openOverlay('date_start_content_modal')"></span>
                             <span class="wb-inv" data-i18n="hlp-three-years-ago-title"></span>
                         </sup>
                     </label>
@@ -147,7 +147,7 @@
                         <span class="field-name" data-i18n="select-enddate"></span> 
                         <strong class="required" data-i18n="Required"></strong>
                         <sup>
-                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true" onclick="openOverlay('date_content_modal')"></span>
+                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true" onclick="openOverlay('date_end_content_modal')"></span>
                             <span class="wb-inv" data-i18n="hlp-three-years-ago-title"></span>
                         </sup>
                     </label>
@@ -595,7 +595,7 @@
                         <summary><span data-i18n="Googlesearchanalytics"></span></summary>
                         <div id="gsc-content">
                         <p>
-                            <strong data-i18n="Period:"></strong> <span id="fromdaterangegsc"></span> <span id="gscto" data-i18n="to"></span> <span id="todaterangegsc"></span> <sup id="fn1b-rf"><a class="fn-lnk" href="#fn1b"><span class="wb-inv">Footnote </span>1</a></sup> <!-- display the date range for the 'Google Search analytics' data retreived in words -->
+                            <strong data-i18n="Period:"></strong> <span id="fromdaterangegsc"></span> <span id="gscto" data-i18n="to"></span> <span id="todaterangegsc"></span> <sup id="fn1b-rf"><a class="fn-lnk" href="#fn1b"><span class="wb-inv">Footnote </span>1</a></sup> <!-- display the date range for the 'Google search analytics' data retreived in words -->
                         </p>
                         <div class="col-md-3 col-md-offset-3" style="vertical-align: top;">
                             <section class="bg bg-success text-center brdr-lft brdr-lft brdr-rght brdr-tp brdr-bttm">
@@ -730,7 +730,7 @@
                 -->
                 </div>
             </div>
-            <p id="moreDetailedAnalysis"><span class="glyphicon glyphicon-exclamation-sign" style="padding-right:15px"></span><span data-i18n="[html]moreDetailedAnalysis"></span></p>
+            <p id="moreDetailedAnalysis"><i class="fa fa-address-book-o" style="font-size:24px"></i></span><span data-i18n="[html]moreDetailedAnalysis"></span></p>
         </div>
 
 <section id="uniquev_content_modal" class="modal-dialog modal-content overlay-def mfp-hide">
@@ -865,13 +865,16 @@
     </header>
     <div class="modal-body" data-i18n="hlp-position"></div>
 </section>
-<section id="date_content_modal" class="mfp-hide modal-dialog modal-content overlay-def">
-    <!-- no header needed -->
-    <!--
+<section id="date_start_content_modal" class="mfp-hide modal-dialog modal-content overlay-def">
     <header class="modal-header">
-        <h2 class="modal-title" data-i18n="hlp-three-years-ago-title"></h2>
+        <h2 class="modal-title" data-i18n="hlp-three-start-title"></h2>
     </header>
-    -->
+    <div class="modal-body" data-i18n="hlp-three"></div>
+</section>
+<section id="date_end_content_modal" class="mfp-hide modal-dialog modal-content overlay-def">
+    <header class="modal-header">
+        <h2 class="modal-title" data-i18n="hlp-three-end-title"></h2>
+    </header>
     <div class="modal-body" data-i18n="hlp-three"></div>
 </section>
 
