@@ -189,18 +189,13 @@ try {
                 }
             }
 
-            foreach ($html->find('title') as $e) {
-                $titlePage = $e->innertext;
+            // Find the meta tag with name="dcterms.title" and get its content attribute
+            foreach ($html->find('meta[name=dcterms.title]') as $e) {
+                $titlePage = $e->content;
                 break;
             }
 
             $titlePage = trim($titlePage);
-            $titlePage = str_replace('&amp;', '', $titlePage);
-            $titlePage = str_replace('&nbsp;', ' ', $titlePage);
-            $titlePage = str_replace('<br>', '', $titlePage);
-            $titlePage = str_replace('<br/>', '', $titlePage);
-            $titlePage = str_replace('<br />', '', $titlePage);
-            $titlePage = str_replace(' - Canada.ca', '', $titlePage);
 
             $oSearchURL = $searchURL;
 
