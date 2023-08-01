@@ -188,14 +188,15 @@ try {
                     break;
                 }
             }
-
+            
             // Find the meta tag with name="dcterms.title" and get its content attribute
             foreach ($html->find('meta[name=dcterms.title]') as $e) {
                 $titlePage = $e->content;
                 break;
             }
-
+            
             $titlePage = trim($titlePage);
+            $titlePage = html_entity_decode($titlePage);
 
             $oSearchURL = $searchURL;
 
