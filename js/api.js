@@ -1720,10 +1720,6 @@ const jsonSearchesPhrases = (json, day) => {
   jsonSearch(json, val, title, day);
 
   $(val + " table").trigger("wb-init.wb-tables");
-
-  // modify the tables so that the default configuration by passing a JSON array through the data-wb-tables attribute of the table tag
-  // this enables search on table
-  $(val + " table").attr("data-wb-tables", '{ "ordering" : false }');
 };
 
 const jsonSearchesAll = (json, day) => {
@@ -1733,7 +1729,6 @@ const jsonSearchesAll = (json, day) => {
 
   $(val + " table").trigger("wb-init.wb-tables");
 
-  // modify the tables so that the default configuration by passing a JSON array through the data-wb-tables attribute of the table tag
   // this enables search on table
   $(val + " table").attr("data-wb-tables", '{ "ordering" : false }');
 };
@@ -1792,6 +1787,9 @@ const jsonAM = (json, day) => {
       generateTableHead(table, data, $.i18n("OutboundClicksonPage"));
 
       $(val + " table").trigger("wb-init.wb-tables");
+
+      // this enables search on table
+      $(val + " table").attr("data-wb-tables", '{ "ordering" : false }');
     } else {
       $next.html($.i18n("Nodata"));
     }
