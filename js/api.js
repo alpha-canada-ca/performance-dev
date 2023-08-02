@@ -3143,6 +3143,7 @@ const mainQueue = (url, start, end, lang) => {
   $("#canvas-container").addClass("hidden");
   $("#whole-canvas").addClass("hidden");
   $("#notfound").addClass("hidden");
+  $("#notfoundGC").addClass("hidden");
   hideError();
   //$('#loading-popup-modal').removeClass("hidden");
   $("#loading").removeClass("hidden");
@@ -3619,6 +3620,7 @@ const mainQueue = (url, start, end, lang) => {
           $("#loading").addClass("hidden");
           $("#loadFD").empty();
           $("#notfound").addClass("hidden");
+          $("#notfoundGC").addClass("hidden");
           showError();
           $("#errorHeader").val($("#urlStatic").text());
           $("#searchBttn").prop("disabled", false);
@@ -3645,6 +3647,7 @@ const mainQueue = (url, start, end, lang) => {
           $("#loadFD").empty();
           hideError();
           $("#notfound").addClass("hidden");
+          $("#notfoundGC").addClass("hidden");
           $("#whole-canvas").removeClass("hidden");
           $("#searchBttn").prop("disabled", false);
           $("#urlval").val($("#urlStatic").text());
@@ -3707,7 +3710,12 @@ const mainQueue = (url, start, end, lang) => {
     // if url is not empty, display notfound error message
     // if url is empty, no need for notfound error message because other error message already displayed
     if (url) {
-      $("#notfound").removeClass("hidden");
+      // if the url contains canada.ca or gc.ca
+      if (url.includes("canada.ca") || url.includes("gc.ca")) {
+        $("#notfoundGC").removeClass("hidden");
+      } else {
+        $("#notfound").removeClass("hidden");
+      }
     }
 
     $("#notfound").attr(
