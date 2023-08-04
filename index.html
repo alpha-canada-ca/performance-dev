@@ -246,6 +246,34 @@
             <span id="loadFD" aria-live="polite" aria-atomic="true" aria-relevant="all"></span>
             <span id="loadComp" aria-live="assertive" aria-atomic="true" aria-relevant="all"></span>
         </p>
+        <!-- CHANGES CHECKLIST #3E -->
+        <!-- possible solution to re-enable search if loading takes longer than 5 minutes, commented out for now -->
+        <!--
+        <script>
+            function hideLoading() {
+                // hide the loading element
+                const loadingElement = document.getElementById("loading");
+                if (loadingElement) {
+                    loadingElement.classList.add("hidden");
+                }
+
+                // enable the search button
+                const searchButton = document.getElementById("searchBttn");
+                if (searchButton) {
+                    searchButton.disabled = false;
+                }
+
+                // unhide the notfoundGC element
+                const notfoundGCElement = document.getElementById("notfoundGC");
+                if (notfoundGCElement) {
+                    notfoundGCElement.classList.remove("hidden");
+                }
+            }
+
+            // Set a timer to hide the loading element after 10 minutes (600000 milliseconds)
+            const timer = setTimeout(hideLoading, 600000);
+        </script>
+        -->
         <!-- return error message invalid url if 'notfound' triggered in api.js after 'Get data' button clicked-->
         <div id="notfound" class="hidden" aria-live="assertive" aria-atomic="true" aria-relevant="additions" style="padding-top:15px">
             <p><span class="glyphicon glyphicon-exclamation-sign" style="padding-right:10px"></span><span data-i18n="Opps"></span></p>
