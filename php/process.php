@@ -3,14 +3,14 @@
 try {
     $d = json_decode(file_get_contents('php://input'));
 
-    $data = include ('data.php');
+    $data = include('data.php');
 
     $url = $d->oUrl;
     $rangeStartToEnd = $d->oRangeStartToEnd; // the number of days between the start date and end date
     $rangeEndToToday = $d->oRangeEndToToday; // the number of days between the end date and today
     $date = $d->dates;
     $type = $d->type;
-    $field =  $d->field;
+    $field = $d->field;
     $start = $date[0];
     $end = $date[1];
     $lang = $d->lang;
@@ -27,7 +27,7 @@ try {
         $iso = 'Y-m-d';
         $end = (new DateTime($end))->format($iso);
     }
-    $start = (new DateTime($start))->format($iso);    
+    $start = (new DateTime($start))->format($iso);
 
     // move back $yesterday to the user selected start date
     $yesterday = $today->modify('-' . $rangeStartToEnd . ' day')
@@ -69,7 +69,7 @@ try {
                 $oDate = "$start/$end";
             }
 
-            if ( $type == "activityMap" || $type == "metrics-new" || $type == "srchAll" || $type == "refType" || $type == "snmAll" || $type == "srchLeftAll" || $type == "fwylf" || $type == "prvs" || $type == "trnd") {
+            if ($type == "activityMap" || $type == "metrics-new" || $type == "srchAll" || $type == "refType" || $type == "snmAll" || $type == "srchLeftAll" || $type == "fwylf" || $type == "prvs" || $type == "trnd") {
                 $oDate = $dates2[0] . "/" . $end;
                 $sm = "multi";
             } else {
@@ -79,25 +79,25 @@ try {
                 if ($field == "aa") {
                     $md = mongoGet($oUrl, $oDate, $type, $sm, "search", $lang);
                 } else {
-                    $md = mongoGet($origUrl, $oDate, $type, "multi", "search","bi");
+                    $md = mongoGet($origUrl, $oDate, $type, "multi", "search", "bi");
                 }
                 if ($md) {
                     //$md = json_encode( array('bypol' => 'fgfg', 'errorCode' => 'yaaaaydfgy' ));
                     $oMd = $md;
-                    $md = json_decode( $md, true );
+                    $md = json_decode($md, true);
 
-                    if ( array_key_exists('error', $md) ) {
+                    if (array_key_exists('error', $md)) {
                         $error = 1;
-                        $md = json_encode( array('error' => $md['error'], 'message' => $md['message'] ));
-                    } else if ( array_key_exists('errorCode', $md) ) {
+                        $md = json_encode(array('error' => $md['error'], 'message' => $md['message']));
+                    } else if (array_key_exists('errorCode', $md)) {
                         $error = 1;
-                        $md = json_encode( array('error' => ( $md['errorId'] . ' - ' . $md['errorCode'] ), 'message' => $md['errorDescription'] ));
-                    } else if ( array_key_exists('error_code', $md) ) {
+                        $md = json_encode(array('error' => ($md['errorId'] . ' - ' . $md['errorCode']), 'message' => $md['errorDescription']));
+                    } else if (array_key_exists('error_code', $md)) {
                         $error = 1;
-                        $md = json_encode( array('error' => $md['error_code'], 'message' => $md['message'] ));
+                        $md = json_encode(array('error' => $md['error_code'], 'message' => $md['message']));
                     } else {
                         $error = 0;
-                        $md = json_encode( $md );
+                        $md = json_encode($md);
                     }
 
                     // TODO:
@@ -105,8 +105,8 @@ try {
                     // Parameters needed, such as the type (call), url, date, lang
                     // include api_post.php
                     // i.e. $result = api_post($config[0]['ADOBE_API_KEY'], $config[0]['COMPANY_ID'], $_SESSION['token'], $api);
-                    
-                    if ( $error ) {
+
+                    if ($error) {
                         if ($field == "aa") {
                             mongoDelete($oUrl, "search", $type, $oMd, $sm, $oDate, $lang);
                         } else {
@@ -123,8 +123,7 @@ try {
             }
         }
     }
-}
-catch(Exception $ex) {
+} catch (Exception $ex) {
     echo json_encode(array('error' => $ex));
 }
 
