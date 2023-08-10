@@ -18,11 +18,11 @@ try {
     $mode = (empty($_REQUEST["mode"])) ? "update" : $_REQUEST["mode"];
 
     $today = new DateTime("today"); // set $today to today
-    $today = $today->modify('-' . $rangeEndToToday . ' day'); // move back $today to the user selected end date
+    $endDate = $today->modify('-' . $rangeEndToToday . ' day'); // move back $today to the user selected end date
 
     if ($field == "aa") {
         $iso = 'Y-m-d\TH:i:s.v';
-        $end = $today->format($iso);
+        $end = $endDate->format($iso);
     } else {
         $iso = 'Y-m-d';
         $end = (new DateTime($end))->format($iso);
@@ -30,7 +30,7 @@ try {
     $start = (new DateTime($start))->format($iso);
 
     // move back $yesterday to the user selected start date
-    $yesterday = $today->modify('-' . $rangeStartToEnd . ' day')
+    $startDate = $endDate->modify('-' . $rangeStartToEnd . ' day')
         ->format($iso);
     // $week is a garbage value x2 the range of yesterday
     $week = $today->modify('-' . $rangeStartToEnd . ' day')
@@ -39,7 +39,7 @@ try {
     $month = $today->modify('-' . $rangeStartToEnd . ' day')
         ->format($iso);
 
-    $dates2 = [$month, $week, $yesterday];
+    $dates2 = [$month, $week, $startDate];
 
     $dates = [$start];
 
