@@ -1079,7 +1079,7 @@ const jsonPrevious = (json, day) => {
       f =
         url == "blank page url"
           ? $.i18n("Directtraffic/Bookmark")
-          : "<a href='" + url + "'>" + term + "</a>";
+          : "<a href='https://" + url + "'>" + term + "</a>";
 
       var obj = {};
       obj[$.i18n("PreviouspageURL")] = f;
