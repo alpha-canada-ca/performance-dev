@@ -133,8 +133,8 @@
                         <span class="field-name" data-i18n="select-startdate"></span> 
                         <strong class="required" data-i18n="Required"></strong>
                         <sup>
-                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true" onclick="openOverlay('date_start_content_modal')"></span>
-                            <span class="wb-inv" data-i18n="hlp-three-years-ago-title"></span>
+                            <a href="javascript:void(0);" class="glyphicon glyphicon-info-sign" data-i18n-aria-label="hlp-modal-startdate" onclick="openOverlay('date_start_content_modal')"></a>
+                            <span class="wb-inv" data-i18n="hlp-three-start-title"></span>
                         </sup>
                     </label>
                     <input class="form-control" type="date" id="startdate" name="startdate" min="" required="required"/>
@@ -146,8 +146,8 @@
                         <span class="field-name" data-i18n="select-enddate"></span> 
                         <strong class="required" data-i18n="Required"></strong>
                         <sup>
-                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true" onclick="openOverlay('date_end_content_modal')"></span>
-                            <span class="wb-inv" data-i18n="hlp-three-years-ago-title"></span>
+                            <a href="javascript:void(0);" class="glyphicon glyphicon-info-sign" data-i18n-aria-label="hlp-modal-enddate" onclick="openOverlay('date_end_content_modal')"></a>
+                            <span class="wb-inv" data-i18n="hlp-three-end-title"></span>
                         </sup>
                     </label>
                     <input class="form-control" type="date" id="enddate" name="enddate" min="" required="required"/>
@@ -286,7 +286,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <h2><span class="wb-inv" data-i18n="Datafor"></span><span id="h2title" data-i18n="Page-levelstatistics"></span></h2>
-                    <span id="urlStatic" class="small" aria-hidden="true"></span>
+                    <span id="urlStatic" class="small"></span>
                     <p class="small"><a id="h2href" href="#" data-i18n="LanguageToggle"></a></p> <!-- link to view analytics for equivalent FR/EN page, if it is a canada.ca url -->
                     <p id="urlLang" class="hidden"></p>
                 </div>
@@ -348,18 +348,54 @@
                             <h2><strong data-i18n="Onthispage"></strong></h2>
                             <!-- English table of contents anchor links -->
                             <ul id="table-of-contents-english">
-                                <li><a href="#key-metrics"><span data-i18n="Keymetrics"></span></a></li>
-                                <li><a href="#traffic-sources"><span data-i18n="Trafficsources"></span></a></li>
-                                <li><a href="#visitor-profile"><span data-i18n="Visitorprofile"></span></a></li>
-                                <li><a href="#visitor-activity"><span data-i18n="Visitoractivity"></span></a></li>
+                                <li><a href="#key-metrics"><span data-i18n="Keymetrics"></span></a>
+                                    <ul>
+                                        <li><a href="#chart-trnds"><span data-i18n="Visitstrendbycurrentyearandpreviousyear"></span></a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#traffic-sources"><span data-i18n="Trafficsources"></span></a>
+                                    <ul>
+                                        <li><a href="#reft-container"><span data-i18n="Referringtypes"></span></a></li>
+                                        <li><a href="#ppt-container"><span data-i18n="Whereuserscamefrom"></span></a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#visitor-profile"><span data-i18n="Visitorprofile"></span></a>
+                                    <ul>
+                                        <li><a href="#geo-container"><span data-i18n="Whereaccess"></span></a></li>
+                                        <li><a href="#chart-pltfrms"><span data-i18n="Numberofvisits(%)bydevicesused"></span></a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#visitor-activity"><span data-i18n="Visitoractivity"></span></a>
+                                    <ul>
+                                        <li><a href="#np-container"><span data-i18n="Whatusersclickedon"></span></a></li>
+                                    </ul>
+                                </li>
                             </ul>
 
                             <!-- French table of contents anchor links -->
                             <ul id="table-of-contents-french">
-                                <li><a href="#mesures-clés"><span data-i18n="Keymetrics"></span></a></li>
-                                <li><a href="#sources-de-trafic"><span data-i18n="Trafficsources"></span></a></li>
-                                <li><a href="#profil-du-visiteur"><span data-i18n="Visitorprofile"></span></a></li>
-                                <li><a href="#activité-de-visiteur"><span data-i18n="Visitoractivity"></span></a></li>
+                                <li><a href="#mesures-clés"><span data-i18n="Keymetrics"></span></a>
+                                    <ul>
+                                        <li><a href="#chart-trnds"><span data-i18n="Visitstrendbycurrentyearandpreviousyear"></span></a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#sources-de-trafic"><span data-i18n="Trafficsources"></span></a>
+                                    <ul>
+                                        <li><a href="#reft-container"><span data-i18n="Referringtypes"></span></a></li>
+                                        <li><a href="#ppt-container"><span data-i18n="Whereuserscamefrom"></span></a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#profil-du-visiteur"><span data-i18n="Visitorprofile"></span></a>
+                                    <ul>
+                                        <li><a href="#geo-container"><span data-i18n="Whereaccess"></span></a></li>
+                                        <li><a href="#chart-pltfrms"><span data-i18n="Numberofvisits(%)bydevicesused"></span></a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#activité-de-visiteur"><span data-i18n="Visitoractivity"></span></a>
+                                    <ul>
+                                        <li><a href="#np-container"><span data-i18n="Whatusersclickedon"></span></a></li>
+                                    </ul>
+                                </li>
                             </ul>
 
                             <!-- KEY METRICS --> 

@@ -1,11 +1,15 @@
 function handleDateRangeSetup(start, end) {
-  const currentDate = new Date().toISOString().split("T")[0];
+  const aDayAgo = new Date();
+  // Subtract one day to get the previous day
+  aDayAgo.setDate(aDayAgo.getDate() - 1);
+  const currentDate = aDayAgo.toISOString().split("T")[0];
 
   // Set max dates for start and end
   $("#startdate, #enddate").attr("max", currentDate);
 
   // Calculate three years ago
   const threeYearsAgo = new Date();
+  threeYearsAgo.setDate(threeYearsAgo.getDate() - 1);
   threeYearsAgo.setFullYear(threeYearsAgo.getFullYear() - 3);
   const formattedThreeYearsAgo = threeYearsAgo.toISOString().slice(0, 10);
 
@@ -2838,6 +2842,9 @@ const containsAny = (str, substrings) => {
 
 const mainQueue = (url, start, end, lang) => {
   console.log(url);
+  console.log(start);
+  console.log("***");  
+  console.log(end);
 
   $("#canvas-container").addClass("hidden");
   $("#whole-canvas").addClass("hidden");
@@ -2924,7 +2931,8 @@ const mainQueue = (url, start, end, lang) => {
     "Numerical date range between end2 and today: " + rangeEnd2ToToday
   );
 
-  var threeYearsAgo = moment().subtract(3, "years").format("YYYY-MM-DD");
+  //var threeYearsAgo = moment().subtract(3, "years").format("YYYY-MM-DD");
+  var threeYearsAgo = moment().subtract(1, "days").subtract(3, "years").format("YYYY-MM-DD");
 
   if (
     startDateWords == "Invalid Date" ||
