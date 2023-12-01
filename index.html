@@ -253,20 +253,20 @@
         </script>
         -->
         <!-- return error message invalid url if 'notfound' triggered in api.js after 'Get data' button clicked-->
-        <div id="notfound" class="hidden" aria-live="assertive" aria-atomic="true" aria-relevant="additions" style="padding-top:15px">
+        <div id="notfound" class="hidden" role="alert" aria-live="assertive" aria-atomic="true" aria-relevant="additions" style="padding-top:15px">
             <p><span class="glyphicon glyphicon-exclamation-sign" style="padding-right:10px"></span><span data-i18n="Opps"></span></p>
         </div>
          <!-- return error message invalid url if 'notfoundGC' triggered in api.js after 'Get data' button clicked-->
-         <div id="notfoundGC" class="hidden" aria-live="assertive" aria-atomic="true" aria-relevant="additions" style="padding-top:15px">
+         <div id="notfoundGC" class="hidden" role="alert" aria-live="assertive" aria-atomic="true" aria-relevant="additions" style="padding-top:15px">
             <p><span class="glyphicon glyphicon-exclamation-sign" style="padding-right:10px"></span><span data-i18n="[html]OppsGC"></span></p>
         </div>
-        <div id="error" class="hidden" aria-live="assertive" aria-atomic="true" aria-relevant="additions" style="padding-top:15px">
-            <p><span class="glyphicon glyphicon-exclamation-sign" style="padding-right:10px"></span><span class="error_display" data-i18n="errorOccured"></span></p>
+        <div id="error" class="hidden" role="alert" aria-live="assertive" aria-atomic="true" aria-relevant="additions" style="padding-top:15px">
+            <p><span class="glyphicon glyphicon-exclamation-sign" style="padding-right:10px"></span><span class="error_display" data-i18n="errorOccured" data-i18n-aria-label=""></span></p>
 
             <details id="error-canvas">
                 <summary data-i18n="moreDetails"></summary>
-                <p><strong data-i18n="title"></strong>: <span id="errorHeader"></span></p>
-                <p><strong data-i18n="message"></strong>: <span id="errorDetails"></span></p>
+                <p><strong data-i18n="title" data-i18n-aria-label="title"></strong>: <span id="errorHeader"></span></p>
+                <p><strong data-i18n="message" data-i18n-aria-label="message"></strong>: <span id="errorDetails"></span></p>
             </details>
 
         </div>
