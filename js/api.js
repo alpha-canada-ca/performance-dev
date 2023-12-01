@@ -2818,6 +2818,7 @@ function showError() {
   $("#error").attr("data-gc-analytics-customcall", errTrack);
   $(".error_display").attr("data-i18n", errKey);
   $(".error_display").text($.i18n(errKey));
+  $(".error_display").attr("data-i18n-aria-label", errKey);
 
   _satellite.track("CUSTOM_TRACK");
 }
