@@ -162,3 +162,8 @@ a[href^="#activité-de-visiteur"] + ul,   */
   display:none;
 }
 
+.button-nostyle {
+background: none;
+border: none;
+padding: 0;  
+}
