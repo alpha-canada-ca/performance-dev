@@ -131,28 +131,52 @@
                 <div class="form-group">
                     <label for="startdate" class="required">
                         <span class="field-name" data-i18n="select-startdate"></span> 
-                        <strong class="required" data-i18n="Required" data-i18n-aria-label="hlp-three"></strong>
+                        <strong class="required" data-i18n="Required"></strong>
                         <sup>
-                            <a href="javascript:void(0);" class="glyphicon glyphicon-info-sign" data-i18n-aria-label="hlp-modal-startdate" onclick="openOverlay('date_start_content_modal')"></a>
+                            <button class="glyphicon glyphicon-info-sign button-nostyle" 
+                                    aria-labelledby="startdate-info-label" 
+                                    aria-describedby="startdate-info-description"  
+                                    onclick="openOverlay('date_start_content_modal')" type="button">
+                            </button>
                             <!-- <span class="wb-inv" data-i18n="hlp-three"></span> -->
                         </sup>
                     </label>
-                    <input class="form-control" type="date" id="startdate" name="startdate" min="" required="required" aria-label="Select start date, required field. Enter the date in the format: year (four digits), month (two digits), day (two digits)" />
+                    <input class="form-control" type="date" id="startdate" name="startdate" min="" required="required" aria-labelledby="startdate-description" />
+                    
+                    <span id="startdate-info-label" class="wb-inv" data-i18n="startdate-hlp-label"></span>
+                    <span id="startdate-info-description" class="wb-inv" data-i18n="startdate-hlp-description"></span>
+                    <span id="startdate-description" class="wb-inv" data-i18n="select-startdate-description"></span>
                     <!-- <span id="startDateHelp" class="wb-inv" data-i18n="hlp-three"></span> -->
                 </div>
 
                 <!-- calendar date picker for enddate -->
                 <div class="form-group">
-                    <label for="enddate" class="required">
+                    <!-- <label for="enddate" class="required">
                         <span class="field-name" data-i18n="select-enddate"></span> 
                         <strong class="required" data-i18n="Required" data-i18n-aria-label="hlp-three"></strong>
                         <sup>
-                            <a href="javascript:void(0);" class="glyphicon glyphicon-info-sign" data-i18n-aria-label="hlp-modal-enddate" onclick="openOverlay('date_end_content_modal')"></a>
+                            <a href="javascript:void(0);" class="glyphicon glyphicon-info-sign" data-i18n-aria-label="hlp-modal-enddate" onclick="openOverlay('date_end_content_modal')"></a> -->
                             <!-- <span class="wb-inv" data-i18n="hlp-three"></span> -->
+                    <!--    </sup>
+                    </label>
+                    <input class="form-control" type="date" id="enddate" name="enddate" min="" required="required" aria-label="Select end date, required field. Enter the date in the format: year (four digits), month (two digits), day (two digits)" />-->
+                    <!-- <span id="endDateHelp" class="wb-inv" data-i18n="hlp-three"></span> -->
+                    <label class="required" for="enddate">
+                        <span class="field-name" id="enddate-field-name" data-i18n="select-enddate"></span>
+                        <strong class="required" data-i18n="Required"></strong>
+                        <sup>
+                            <button class="glyphicon glyphicon-info-sign button-nostyle" 
+                                    aria-labelledby="enddate-info-label" 
+                                    aria-describedby="enddate-info-description" 
+                                    onclick="openOverlay('date_end_content_modal')" type="button">
+                            </button>
                         </sup>
                     </label>
-                    <input class="form-control" type="date" id="enddate" name="enddate" min="" required="required" aria-label="Select end date, required field. Enter the date in the format: year (four digits), month (two digits), day (two digits)" />
-                    <!-- <span id="endDateHelp" class="wb-inv" data-i18n="hlp-three"></span> -->
+                    <input class="form-control" type="date" id="enddate" name="enddate" min="" required="required" aria-labelledby="enddate-description" />
+                    
+                    <span id="enddate-info-label" class="wb-inv" data-i18n="enddate-hlp-label"></span>
+                    <span id="enddate-info-description" class="wb-inv" data-i18n="enddate-hlp-description"></span>
+                    <span id="enddate-description" class="wb-inv" data-i18n="select-enddate-description"></span>
                 </div>
             </div>
             <button data-gc-analytics-formsubmit="submit" class="btn btn-primary" id="searchBttn" type="submit"><span class="glyphicon-search glyphicon"></span> <span data-i18n="Getdata"></span></button>
@@ -413,9 +437,16 @@
                                     <section class="bg bg-success text-center brdr-lft brdr-lft brdr-rght brdr-tp brdr-bttm">
                                         <p class="blue-box"><strong data-i18n="Averageuniquevisitors"></strong>
                                             <sup>
-                                                <span class="glyphicon glyphicon-info-sign" aria-hidden="true" onclick="openOverlay('uniquev_content_modal')"></span> 
-                                                <span class="wb-inv" data-i18n="hlp-unique-visitors-title"></span>
+                                                <!-- <span class="glyphicon glyphicon-info-sign" aria-hidden="true" onclick="openOverlay('uniquev_content_modal')"></span>  -->
+                                                <button 
+                                                    class="glyphicon glyphicon-info-sign button-nostyle" 
+                                                    aria-labelledby="hlp-unique-visitors-title"
+                                                    aria-describedby="opens-modal-window"   
+                                                    onclick="openOverlay('uniquev_content_modal')" type="button">
+                                                </button> 
                                             </sup>
+                                            <span id="hlp-unique-visitors-title" class="wb-inv" data-i18n="hlp-unique-visitors-title"></span>
+                                            <span id="opens-modal-window" class="wb-inv" data-i18n="opens-modal-window"></span>
                                         </p>
                                         <div id="uv"></div>
                                         <p></p>
@@ -427,9 +458,16 @@
                                     <section class="bg bg-success text-center brdr-lft brdr-lft brdr-rght brdr-tp brdr-bttm">
                                         <p class="blue-box"><strong data-i18n="Averagevisits"></strong> 
                                             <sup>
-                                                <span class="glyphicon glyphicon-info-sign" aria-hidden="true" onclick="openOverlay('visits_content_modal')"></span> 
-                                                <span class="wb-inv" data-i18n="hlp-average-visits-title"></span>
+                                                <!-- <span class="glyphicon glyphicon-info-sign" aria-hidden="true" onclick="openOverlay('visits_content_modal')"></span>  
+                                                     <span class="wb-inv" data-i18n="hlp-average-visits-title"></span>-->
+                                                <button 
+                                                    class="glyphicon glyphicon-info-sign button-nostyle" 
+                                                    aria-labelledby="hlp-average-visits-title"
+                                                    aria-describedby="opens-modal-window"   
+                                                    onclick="openOverlay('visits_content_modal')" type="button">
+                                                </button> 
                                             </sup>
+                                            <span id="hlp-average-visits-title" class="wb-inv" data-i18n="hlp-average-visits-title"></span>  
                                         </p>
                                         <div id="visit"></div>
                                         <p></p>
@@ -440,10 +478,19 @@
                                 <div class="col-md-3" style="vertical-align: top;">
                                     <section class="bg bg-success text-center brdr-lft brdr-lft brdr-rght brdr-tp brdr-bttm">
                                         <p class="blue-box"><strong data-i18n="Averagepageviews"></strong> 
-                                            <sup>
+                                            <!-- <sup>
                                                 <span class="glyphicon glyphicon-info-sign" aria-hidden="true" onclick="openOverlay('pv_content_modal')"></span> 
                                                 <span class="wb-inv" data-i18n="hlp-average-pgv-title"></span>
+                                            </sup> -->
+                                            <sup>
+                                                <button 
+                                                    class="glyphicon glyphicon-info-sign button-nostyle" 
+                                                    aria-labelledby="hlp-average-pgv-title"
+                                                    aria-describedby="opens-modal-window"   
+                                                    onclick="openOverlay('pv_content_modal')" type="button">
+                                                </button> 
                                             </sup>
+                                            <span id="hlp-average-pgv-title" class="wb-inv" data-i18n="hlp-average-pgv-title"></span>
                                         </p>
                                         <div id="pagev"></div>
                                         <p></p>
@@ -454,10 +501,19 @@
                                 <div class="col-md-3" style="vertical-align: top;">
                                     <section class="bg bg-success text-center brdr-lft brdr-lft brdr-rght brdr-tp brdr-bttm">
                                         <p class="blue-box"><strong data-i18n="Averagetimespent"></strong> 
-                                            <sup>
+                                            <!-- <sup>
                                                 <span class="glyphicon glyphicon-info-sign" aria-hidden="true" onclick="openOverlay('tmspnt_content_modal')"></span> 
                                                 <span class="wb-inv" data-i18n="hlp-average-tmspnt-title"></span>
+                                            </sup> -->
+                                            <sup>
+                                                <button 
+                                                    class="glyphicon glyphicon-info-sign button-nostyle" 
+                                                    aria-labelledby="hlp-average-tmspnt-title"
+                                                    aria-describedby="opens-modal-window"   
+                                                    onclick="openOverlay('tmspnt_content_modal')" type="button">
+                                                </button> 
                                             </sup>
+                                            <span id="hlp-average-tmspnt-title" class="wb-inv" data-i18n="hlp-average-tmspnt-title"></span>
                                         </p>
                                         <div id="avgtime"></div>
                                         <p></p>
@@ -470,10 +526,19 @@
                                     <div id="chrtt" data-i18n="Nodata"></div>
                                     <div id="chart-trnds">
                                         <h3><span data-i18n="Visitstrendbycurrentyearandpreviousyear"></span>&nbsp;
-                                            <sup>
+                                            <!-- <sup>
                                                 <span class="glyphicon glyphicon-info-sign" aria-hidden="true" onclick="openOverlay('chrtt_content_modal')"></span> 
                                                 <span class="wb-inv" data-i18n="hlp-trends-title"></span>
+                                            </sup> -->
+                                            <sup>
+                                                <button 
+                                                    class="glyphicon glyphicon-info-sign button-nostyle" 
+                                                    aria-labelledby="hlp-trends-title"
+                                                    aria-describedby="opens-modal-window"   
+                                                    onclick="openOverlay('chrtt_content_modal')" type="button">
+                                                </button> 
                                             </sup>
+                                            <span id="hlp-trends-title" class="wb-inv" data-i18n="hlp-trends-title"></span>
                                         </h3>
                                         <div id="trends-canvas" style="width: 100%; height: 50vh;" aria-hidden="true">
                                             <canvas id="trends" data-i18n="Textalternativeforthiscanvasgraphicisinthedatatablebelow." aria-hidden="true"></canvas>
@@ -500,10 +565,19 @@
                                 <!-- REFERRER TYPE --> 
                                 <div class="col-md-12" id="reft-container">
                                     <h3><span data-i18n="Referringtypes"></span>&nbsp;
-                                        <sup>
+                                        <!-- <sup>
                                             <span class="glyphicon glyphicon-info-sign" aria-hidden="true" onclick="openOverlay('reft_content_modal')"></span> 
                                             <span class="wb-inv" data-i18n="hlp-refferrer-type-title"></span>
+                                        </sup> -->
+                                        <sup>
+                                            <button 
+                                                class="glyphicon glyphicon-info-sign button-nostyle" 
+                                                aria-labelledby="hlp-refferrer-type-title"
+                                                aria-describedby="opens-modal-window"   
+                                                onclick="openOverlay('reft_content_modal')" type="button">
+                                            </button> 
                                         </sup>
+                                        <span id="hlp-refferrer-type-title" class="wb-inv" data-i18n="hlp-refferrer-type-title"></span>
                                     </h3>
                                     <div id="reft" class="table-responsive"></div>
                                 </div>
@@ -511,10 +585,19 @@
                                 <!-- WHERE VISITORS CAME FROM --> 
                                 <div class="col-md-12" id="ppt-container">
                                     <h3><span data-i18n="Whereuserscamefrom"></span>&nbsp;
-                                        <sup>
+                                        <!-- <sup>
                                             <span class="glyphicon glyphicon-info-sign" aria-hidden="true" onclick="openOverlay('ppt_content_modal')"></span> 
                                             <span class="wb-inv" data-i18n="hlp-users-came-from-title"></span>
+                                        </sup> -->
+                                        <sup>
+                                            <button 
+                                                class="glyphicon glyphicon-info-sign button-nostyle" 
+                                                aria-labelledby="hlp-users-came-from-title"
+                                                aria-describedby="opens-modal-window"   
+                                                onclick="openOverlay('ppt_content_modal')" type="button">
+                                            </button> 
                                         </sup>
+                                        <span id="hlp-users-came-from-title" class="wb-inv" data-i18n="hlp-users-came-from-title"></span>
                                     </h3>
                                     <div id="ppt" class="table-responsive"></div>
                                     <!--<p id="pp" data-i18n="Nodata"></p>-->
@@ -523,10 +606,19 @@
                                 <!-- CANADA.CA SEARCH TERMS --> 
                                 <div class="col-md-12" id="srchA-container">
                                     <h3><span data-i18n="Searchtermsleadingtothispage"></span>&nbsp;
-                                        <sup>
+                                        <!-- <sup>
                                             <span class="glyphicon glyphicon-info-sign" aria-hidden="true" onclick="openOverlay('srchA_content_modal')"></span> 
                                             <span class="wb-inv" data-i18n="hlp-search-terms-lead-title"></span>
+                                        </sup> -->
+                                        <sup>
+                                            <button 
+                                                class="glyphicon glyphicon-info-sign button-nostyle" 
+                                                aria-labelledby="hlp-search-terms-lead-title"
+                                                aria-describedby="opens-modal-window"   
+                                                onclick="openOverlay('srchA_content_modal')" type="button">
+                                            </button> 
                                         </sup>
+                                        <span id="hlp-search-terms-lead-title" class="wb-inv" data-i18n="hlp-search-terms-lead-title"></span>
                                     </h3>
                                     <div id="srchA" class="table-responsive"></div>
                                 </div>
@@ -543,10 +635,19 @@
                                 <!-- VISITOR LOCATION --> 
                                 <div class="col-md-12" id="geo-container">
                                     <h3><span data-i18n="Whereaccess"></span>&nbsp;
-                                        <sup>
+                                        <!-- <sup>
                                             <span class="glyphicon glyphicon-info-sign" aria-hidden="true" onclick="openOverlay('provChart_content_modal')"></span> 
                                             <span class="wb-inv" data-i18n="hlp-whereaccess-title"></span>
+                                        </sup> -->
+                                        <sup>
+                                            <button 
+                                                class="glyphicon glyphicon-info-sign button-nostyle" 
+                                                aria-labelledby="hlp-whereaccess-title"
+                                                aria-describedby="opens-modal-window"   
+                                                onclick="openOverlay('provChart_content_modal')" type="button">
+                                            </button> 
                                         </sup>
+                                        <span id="hlp-whereaccess-title" class="wb-inv" data-i18n="hlp-whereaccess-title"></span>
                                     </h3>
                                     <div id="provChart" class="table-responsive"></div>
                                 </div>
@@ -557,10 +658,19 @@
                                     <div id="chrtp" data-i18n="Nodata"></div>
                                     <div id="chart-pltfrms">
                                         <h3><span data-i18n="Numberofvisits(%)bydevicesused"></span>&nbsp;
-                                            <sup>
+                                            <!-- <sup>
                                                 <span class="glyphicon glyphicon-info-sign" aria-hidden="true" onclick="openOverlay('chrtp_content_modal')"></span> 
                                                 <span class="wb-inv" data-i18n="hlp-device-used-title"></span>
+                                            </sup> -->
+                                            <sup>
+                                                <button 
+                                                    class="glyphicon glyphicon-info-sign button-nostyle" 
+                                                    aria-labelledby="hlp-device-used-title"
+                                                    aria-describedby="opens-modal-window"   
+                                                    onclick="openOverlay('chrtp_content_modal')" type="button">
+                                                </button> 
                                             </sup>
+                                            <span id="hlp-device-used-title" class="wb-inv" data-i18n="hlp-device-used-title"></span>
                                         </h3>
                                         <div id="chart-canvas" style="width: 100%; height: 50vh;" aria-hidden="true">
                                             <canvas id="chart" data-i18n="Textalternativeforthiscanvasgraphicisinthedatatablebelow." aria-hidden="true"></canvas>
@@ -587,21 +697,43 @@
                                 <!-- WHAT VISITORS CLICKED ON --> 
                                 <div class="col-md-12" id="np-container">
                                     <h3><span data-i18n="Whatusersclickedon"></span>&nbsp;
-                                        <sup>
+                                        <!-- <sup>
                                             <span class="glyphicon glyphicon-info-sign" aria-hidden="true" onclick="openOverlay('np_content_modal')"></span> 
                                             <span class="wb-inv" data-i18n="hlp-users-click-title"></span>
+                                        </sup> -->
+                                        <sup>
+                                            <button 
+                                                class="glyphicon glyphicon-info-sign button-nostyle" 
+                                                aria-labelledby="hlp-users-click-title"
+                                                aria-describedby="opens-modal-window"   
+                                                onclick="openOverlay('np_content_modal')" type="button">
+                                            </button> 
                                         </sup>
+                                        <span id="hlp-users-click-title" class="wb-inv" data-i18n="hlp-users-click-title"></span>
                                     </h3>
+                                    <section class="alert alert-info">
+                                        <h4 data-i18n="alert-am-removed-title"></h4>
+                                        <p data-i18n="alert-am-removed-text"></p>
+                                      </section>
                                     <div id="np" class="table-responsive"></div>
                                 </div>
 
                                 <!-- CANADA.CA SITE SEARCHES --> 
                                 <div class="col-md-12" id="snum-container">
                                     <h3><strong data-i18n="Searchesstartedfromthispage"></strong> 
-                                        <sup>
+                                        <!-- <sup>
                                             <span class="glyphicon glyphicon-info-sign" aria-hidden="true" onclick="openOverlay('snum_content_modal')"></span> 
                                             <span class="wb-inv" data-i18n="hlp-srch-started-title"></span>
+                                        </sup> -->
+                                        <sup>
+                                            <button 
+                                                class="glyphicon glyphicon-info-sign button-nostyle" 
+                                                aria-labelledby="hlp-srch-started-title"
+                                                aria-describedby="opens-modal-window"   
+                                                onclick="openOverlay('snum_content_modal')" type="button">
+                                            </button> 
                                         </sup>
+                                        <span id="hlp-srch-started-title" class="wb-inv" data-i18n="hlp-srch-started-title"></span>
                                     </h3>
                                     <p id="snum"></p>
                                     <!-- PHRASES SEARCHED --> 
@@ -614,10 +746,19 @@
                             <div class="col-md-6" id="fwlf-container" style="display: none;">
                                 <div id="rap-container">
                                     <h2><strong data-i18n="Reportaproblem"></strong>
-                                        <sup>
+                                        <!-- <sup>
                                             <span class="glyphicon glyphicon-info-sign" aria-hidden="true" onclick="openOverlay('rap_content_modal')"></span>
                                             <span class="wb-inv" data-i18n="hlp-rap-title"></span>
-                                        </sup>                                      
+                                        </sup> -->
+                                        <sup>
+                                            <button 
+                                                class="glyphicon glyphicon-info-sign button-nostyle" 
+                                                aria-labelledby="hlp-rap-title"
+                                                aria-describedby="opens-modal-window"   
+                                                onclick="openOverlay('rap_content_modal')" type="button">
+                                            </button> 
+                                        </sup>
+                                        <span id="hlp-rap-title" class="wb-inv" data-i18n="hlp-rap-title"></span>                                      
                                     </h2>
 
                                     <div id="rapCont" class="table-responsive"></div>
@@ -625,10 +766,19 @@
                                 </div>
                                 <div id="fwylf-container">
                                     <h2><strong data-i18n="FindWhatYoureLookingFor"></strong>
-                                        <sup>
+                                        <!-- <sup>
                                             <span class="glyphicon glyphicon-info-sign" aria-hidden="true" onclick="openOverlay('fwylf_content_modal')"></span>
                                             <span class="wb-inv" data-i18n="hlp-fwylf-title"></span>
-                                        </sup>   
+                                        </sup> -->
+                                        <sup>
+                                            <button 
+                                                class="glyphicon glyphicon-info-sign button-nostyle" 
+                                                aria-labelledby="hlp-fwylf-title"
+                                                aria-describedby="opens-modal-window"   
+                                                onclick="openOverlay('fwylf_content_modal')" type="button">
+                                            </button> 
+                                        </sup>
+                                        <span id="hlp-fwylf-title" class="wb-inv" data-i18n="hlp-fwylf-title"></span>                                         
                                     </h2>
                                     <div id="fwylfCont">
                                         <div id="fwylfTable" class="table-responsive"></div>
@@ -650,10 +800,19 @@
                         <div class="col-md-3 col-md-offset-3" style="vertical-align: top;">
                             <section class="bg bg-success text-center brdr-lft brdr-lft brdr-rght brdr-tp brdr-bttm">
                                 <p class="blue-box"><strong data-i18n="Totalclicks"></strong>
-                                    <sup>
+                                    <!-- <sup>
                                         <span class="glyphicon glyphicon-info-sign" aria-hidden="true" onclick="openOverlay('gscc_content_modal')"></span>
                                         <span class="wb-inv" data-i18n="hlp-total-clicks-title"></span>
-                                    </sup>                                           
+                                    </sup> -->
+                                    <sup>
+                                        <button 
+                                            class="glyphicon glyphicon-info-sign button-nostyle" 
+                                            aria-labelledby="hlp-total-clicks-title"
+                                            aria-describedby="opens-modal-window"   
+                                            onclick="openOverlay('gscc_content_modal')" type="button">
+                                        </button> 
+                                    </sup>
+                                    <span id="hlp-total-clicks-title" class="wb-inv" data-i18n="hlp-total-clicks-title"></span>                                                                                    
                                 </p>
                                 <p class="mrgn-tp-md" id="gsc-clicks"></p>
                             </section>
@@ -661,10 +820,19 @@
                         <div class="col-md-3" style="vertical-align: top;">
                             <section class="bg bg-success text-center brdr-lft brdr-lft brdr-rght brdr-tp brdr-bttm">
                                 <p class="blue-box"><strong data-i18n="Totalimpressions"></strong>
-                                    <sup>
+                                    <!-- <sup>
                                         <span class="glyphicon glyphicon-info-sign" aria-hidden="true" onclick="openOverlay('gsci_content_modal')"></span>
                                         <span class="wb-inv" data-i18n="hlp-total-impressions-title"></span>
-                                    </sup>                                            
+                                    </sup> -->
+                                    <sup>
+                                        <button 
+                                            class="glyphicon glyphicon-info-sign button-nostyle" 
+                                            aria-labelledby="hlp-total-impressions-title"
+                                            aria-describedby="opens-modal-window"   
+                                            onclick="openOverlay('gsci_content_modal')" type="button">
+                                        </button> 
+                                    </sup>
+                                    <span id="hlp-total-impressions-title" class="wb-inv" data-i18n="hlp-total-impressions-title"></span>                                             
                                 </p>
                                 <p class="mrgn-tp-md" id="gsc-imp"></p>
                             </section>
@@ -783,11 +951,11 @@
             <p id="moreDetailedAnalysis"><i class="fa fa-address-book-o" style="font-size:24px; padding-right:15px"></i><span data-i18n="[html]moreDetailedAnalysis"></span></p>
         </div>
 
-<section id="uniquev_content_modal" class="modal-dialog modal-content overlay-def mfp-hide">
+<section id="uniquev_content_modal" class="mfp-hide modal-dialog modal-content overlay-def">
     <header class="modal-header">
         <h2 class="modal-title" data-i18n="hlp-unique-visitors-title"></h2>
     </header>
-    <div class="modal-body" data-i18n="hlp-unique-visitors"></div>
+    <div tabindex="0" class="modal-body" data-i18n="hlp-unique-visitors"></div>
     <div class="modal-footer">
         <button class="btn btn-sm btn-primary pull-left popup-modal-dismiss" type="button" data-i18n="Close"><span class="wb-inv"></span></button>
     </div>
@@ -796,7 +964,7 @@
     <header class="modal-header">
         <h2 class="modal-title" data-i18n="hlp-average-visits-title"></h2>
     </header>
-    <div class="modal-body" data-i18n="hlp-average-visits"></div>
+    <div tabindex="0" class="modal-body" data-i18n="hlp-average-visits"></div>
     <div class="modal-footer">
         <button class="btn btn-sm btn-primary pull-left popup-modal-dismiss" type="button" data-i18n="Close"><span class="wb-inv"></span></button>
     </div>
@@ -805,7 +973,7 @@
     <header class="modal-header">
         <h2 class="modal-title" data-i18n="hlp-average-pgv-title"></h2>
     </header>
-    <div class="modal-body" data-i18n="hlp-average-pgv"></div>
+    <div tabindex="0" class="modal-body" data-i18n="hlp-average-pgv"></div>
     <div class="modal-footer">
         <button class="btn btn-sm btn-primary pull-left popup-modal-dismiss" type="button" data-i18n="Close"><span class="wb-inv"></span></button>
     </div>
@@ -814,7 +982,7 @@
     <header class="modal-header">
         <h2 class="modal-title" data-i18n="hlp-average-tmspnt-title"></h2>
     </header>
-    <div class="modal-body" data-i18n="hlp-average-tmspnt"></div>
+    <div tabindex="0" class="modal-body" data-i18n="hlp-average-tmspnt"></div>
     <div class="modal-footer">
         <button class="btn btn-sm btn-primary pull-left popup-modal-dismiss" type="button" data-i18n="Close"><span class="wb-inv"></span></button>
     </div>
@@ -823,7 +991,7 @@
     <header class="modal-header">
         <h2 class="modal-title" data-i18n="hlp-rap-title"></h2>
     </header>
-    <div class="modal-body">
+    <div tabindex="0" class="modal-body">
         <p data-i18n="hlp-rap"></p>
         <p data-i18n="hlp-rap2"></p>
     </div>
@@ -835,7 +1003,7 @@
     <header class="modal-header">
         <h2 class="modal-title" data-i18n="hlp-fwylf-title"></h2>
     </header>
-    <div class="modal-body" data-i18n="hlp-fwylf"></div>
+    <div tabindex="0" class="modal-body" data-i18n="hlp-fwylf"></div>
     <div class="modal-footer">
         <button class="btn btn-sm btn-primary pull-left popup-modal-dismiss" type="button" data-i18n="Close"><span class="wb-inv"></span></button>
     </div>
@@ -844,7 +1012,7 @@
     <header class="modal-header">
         <h2 class="modal-title" data-i18n="hlp-srch-started-title"></h2>
     </header>
-    <div class="modal-body" data-i18n="hlp-srch-started"></div>
+    <div tabindex="0" class="modal-body" data-i18n="hlp-srch-started"></div>
     <div class="modal-footer">
         <button class="btn btn-sm btn-primary pull-left popup-modal-dismiss" type="button" data-i18n="Close"><span class="wb-inv"></span></button>
     </div>
@@ -853,7 +1021,7 @@
     <header class="modal-header">
         <h2 class="modal-title" data-i18n="hlp-phrases-search-title"></h2>
     </header>
-    <div class="modal-body" data-i18n="hlp-phrases-search"></div>
+    <div tabindex="0" class="modal-body" data-i18n="hlp-phrases-search"></div>
     <div class="modal-footer">
         <button class="btn btn-sm btn-primary pull-left popup-modal-dismiss" type="button" data-i18n="Close"><span class="wb-inv"></span></button>
     </div>
@@ -862,7 +1030,7 @@
     <header class="modal-header">
         <h2 class="modal-title" data-i18n="hlp-refferrer-type-title"></h2>
     </header>
-    <div class="modal-body" data-i18n="hlp-refferrer-type"></div>
+    <div tabindex="0" class="modal-body" data-i18n="hlp-refferrer-type"></div>
     <div class="modal-footer">
         <button class="btn btn-sm btn-primary pull-left popup-modal-dismiss" type="button" data-i18n="Close"><span class="wb-inv"></span></button>
     </div>
@@ -871,7 +1039,7 @@
     <header class="modal-header">
         <h2 class="modal-title" data-i18n="hlp-users-came-from-title"></h2>
     </header>
-    <div class="modal-body" data-i18n="hlp-users-came-from"></div>
+    <div tabindex="0" class="modal-body" data-i18n="hlp-users-came-from"></div>
     <div class="modal-footer">
         <button class="btn btn-sm btn-primary pull-left popup-modal-dismiss" type="button" data-i18n="Close"><span class="wb-inv"></span></button>
     </div>
@@ -880,7 +1048,7 @@
     <header class="modal-header">
         <h2 class="modal-title" data-i18n="hlp-search-terms-lead-title"></h2>
     </header>
-    <div class="modal-body" data-i18n="hlp-search-terms-lead"></div>
+    <div tabindex="0" class="modal-body" data-i18n="hlp-search-terms-lead"></div>
     <div class="modal-footer">
         <button class="btn btn-sm btn-primary pull-left popup-modal-dismiss" type="button" data-i18n="Close"><span class="wb-inv"></span></button>
     </div>
@@ -889,7 +1057,7 @@
     <header class="modal-header">
         <h2 class="modal-title" data-i18n="hlp-users-click-title"></h2>
     </header>
-    <div class="modal-body">
+    <div tabindex="0" class="modal-body">
         <p data-i18n="hlp-users-click"></p>
         <p data-i18n="Display25"></p>
         <ul>
@@ -907,7 +1075,7 @@
     <header class="modal-header">
         <h2 class="modal-title" data-i18n="hlp-device-used-title"></h2>
     </header>
-    <div class="modal-body" data-i18n="hlp-device-used"></div>
+    <div tabindex="0" class="modal-body" data-i18n="hlp-device-used"></div>
     <div class="modal-footer">
         <button class="btn btn-sm btn-primary pull-left popup-modal-dismiss" type="button" data-i18n="Close"><span class="wb-inv"></span></button>
     </div>
@@ -916,7 +1084,7 @@
     <header class="modal-header">
         <h2 class="modal-title" data-i18n="hlp-trends-title"></h2>
     </header>
-    <div class="modal-body" data-i18n="hlp-trends"></div>
+    <div tabindex="0" class="modal-body" data-i18n="hlp-trends"></div>
     <div class="modal-footer">
         <button class="btn btn-sm btn-primary pull-left popup-modal-dismiss" type="button" data-i18n="Close"><span class="wb-inv"></span></button>
     </div>
@@ -925,7 +1093,7 @@
     <header class="modal-header">
         <h2 class="modal-title" data-i18n="hlp-whereaccess-title"></h2>
     </header>
-    <div class="modal-body" data-i18n="hlp-whereaccess"></div>
+    <div tabindex="0" class="modal-body" data-i18n="hlp-whereaccess"></div>
     <div class="modal-footer">
         <button class="btn btn-sm btn-primary pull-left popup-modal-dismiss" type="button" data-i18n="Close"><span class="wb-inv"></span></button>
     </div>
@@ -934,7 +1102,7 @@
     <header class="modal-header">
         <h2 class="modal-title" data-i18n="hlp-total-clicks-title"></h2>
     </header>
-    <div class="modal-body" data-i18n="hlp-total-clicks"></div>
+    <div tabindex="0" class="modal-body" data-i18n="hlp-total-clicks"></div>
     <div class="modal-footer">
         <button class="btn btn-sm btn-primary pull-left popup-modal-dismiss" type="button" data-i18n="Close"><span class="wb-inv"></span></button>
     </div>
@@ -943,7 +1111,7 @@
     <header class="modal-header">
         <h2 class="modal-title" data-i18n="hlp-total-impressions-title"></h2>
     </header>
-    <div class="modal-body" data-i18n="hlp-total-impressions"></div>
+    <div tabindex="0" class="modal-body" data-i18n="hlp-total-impressions"></div>
     <div class="modal-footer">
         <button class="btn btn-sm btn-primary pull-left popup-modal-dismiss" type="button" data-i18n="Close"><span class="wb-inv"></span></button>
     </div>
@@ -952,7 +1120,7 @@
     <header class="modal-header">
         <h2 class="modal-title" data-i18n="hlp-region-title"></h2>
     </header>
-    <div class="modal-body" data-i18n="hlp-region"></div>
+    <div tabindex="0" class="modal-body" data-i18n="hlp-region"></div>
     <div class="modal-footer">
         <button class="btn btn-sm btn-primary pull-left popup-modal-dismiss" type="button" data-i18n="Close"><span class="wb-inv"></span></button>
     </div>
@@ -961,7 +1129,7 @@
     <header class="modal-header">
         <h2 class="modal-title" data-i18n="hlp-ctr-title"></h2>
     </header>
-    <div class="modal-body" data-i18n="hlp-ctr"></div>
+    <div tabindex="0" class="modal-body" data-i18n="hlp-ctr"></div>
     <div class="modal-footer">
         <button class="btn btn-sm btn-primary pull-left popup-modal-dismiss" type="button" data-i18n="Close"><span class="wb-inv"></span></button>
     </div>
@@ -970,16 +1138,16 @@
     <header class="modal-header">
         <h2 class="modal-title" data-i18n="hlp-position-title"></h2>
     </header>
-    <div class="modal-body" data-i18n="hlp-position"></div>
+    <div tabindex="0" class="modal-body" data-i18n="hlp-position"></div>
     <div class="modal-footer">
         <button class="btn btn-sm btn-primary pull-left popup-modal-dismiss" type="button" data-i18n="Close"><span class="wb-inv"></span></button>
     </div>
 </section>
 <section id="date_start_content_modal" class="mfp-hide modal-dialog modal-content overlay-def">
     <header class="modal-header">
-        <h2 class="modal-title" data-i18n="hlp-three-start-title"></h2>
+        <h2  class="modal-title" data-i18n="hlp-three-start-title"></h2>
     </header>
-    <div class="modal-body" data-i18n="hlp-three"></div>
+    <div tabindex="0" class="modal-body" data-i18n="hlp-three"></div>
     <div class="modal-footer">
         <button class="btn btn-sm btn-primary pull-left popup-modal-dismiss" type="button" data-i18n="Close"><span class="wb-inv"></span></button>
     </div>
@@ -988,7 +1156,7 @@
     <header class="modal-header">
         <h2 class="modal-title" data-i18n="hlp-three-end-title"></h2>
     </header>
-    <div class="modal-body" data-i18n="hlp-three"></div>
+    <div tabindex="0" class="modal-body" data-i18n="hlp-three"></div>
     <div class="modal-footer">
         <button class="btn btn-sm btn-primary pull-left popup-modal-dismiss" type="button" data-i18n="Close"><span class="wb-inv"></span></button>
     </div>
@@ -1065,7 +1233,7 @@
                     type: "inline"
                 }
             ]
-        ]);
+        ])
         }
     </script>
     <script type="text/javascript" src="js/whitelist.js"></script>
