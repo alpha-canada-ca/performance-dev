@@ -156,7 +156,7 @@ button.black:hover {
 /* Hide 'What visitor clicked on' table  */
 
 /* a[href^="#visitor-activity"] + ul, 
-a[href^="#activité-de-visiteur"] + ul,   */
+a[href^="#activité-de-visiteur"] + ul,*/   
 #np
 {
   display:none;
