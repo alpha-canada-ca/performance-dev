@@ -119,6 +119,7 @@
     "hlp-average-tmspnt-title": "Définition pour le terme ' Temps moyen par visite '",
     "hlp-unique-visitors": "Le nombre de personnes uniques ayant visité la page, une ou plusieurs fois, durant la période sélectionnée. Note : Un individu unique peut apparaître comme plusieurs visiteurs si, par exemple, cette personne accède au site à l'aide d'un téléphone et d'un ordinateur, accède au site sur différents navigateurs ou efface les témoins du navigateur.",
     "hlp-unique-visitors-title": "Définition pour le terme ' Visiteurs uniques '",
+    "hlp-modal-unique-visitors-title": "Ouvrez une fenêtre modale avec l'aide pour une définition de ' Visiteurs uniques '",
     "hlp-srch-started": "Le nombre de recherches effectuées par les visiteurs en utilisant la barre de recherche de Canada.ca pendant qu'ils étaient sur la page.",
     "hlp-srch-started-title": "Définition pour le terme ' Recherches sur Canada.ca commencées à partir de cette page '",
     "hlp-rap": "Un formulaire de rétroaction se trouve au bas des pages de Canada.ca où les visiteurs peuvent signaler un problème ou une erreur sur la page.",
@@ -157,6 +158,13 @@
     "hlp-region-title": "Définition pour le terme ' Localisation des visiteurs '",
     "hlp-modal-startdate": "Ouvrir la fenêtre modale avec l'aide du champ 'Sélectionnez le début de la plage de dates'",
     "hlp-modal-enddate": "Ouvrir la fenêtre modale avec l'aide du champ 'Sélectionnez la fin de la plage de dates'",
+    "enddate-hlp-label": "Icône d'aide Sélectionner la date de fin",
+    "enddate-hlp-description": "Ouvrez une fenêtre modale avec plus d'informations sur la date de fin.",
+    "select-enddate-description": "Sélectionnez la date de fin au format : mois (deux chiffres), jour (deux chiffres), année (quatre chiffres).",
+    "startdate-hlp-label": "Icône d'aide Sélectionner la date de début",
+    "startdate-hlp-description": "Ouvrez une fenêtre modale avec plus d'informations sur la date de début.",
+    "select-startdate-description": "Sélectionnez la date de début au format : mois (deux chiffres), jour (deux chiffres), année (quatre chiffres).",
+    "opens-modal-window": "Ouvre une fenêtre modale",
     "Feedbackbypage": "Données de rétroaction",
     "Getdata": "Obtenez les données",
     "BlurbP1": "Utilisez cet outil pour accéder aux données analytique Web pour n'importe quelle page Web à l'aide de l'outil analytique Web du GC. Nous sommes toujours à la recherche de moyens pour améliorer cet outil. <a  target='_blank' href='https://www.canada.ca/fr/analytique/oap-retroaction.html' aria-label='Ouvrir le formulaire de commentaires dans un nouvel onglet'>Faites-nous part de vos commentaires</a> pour nous aider à l'améliorer.",
@@ -188,5 +196,7 @@
     "Visitoractivity": "Activité des visiteurs",
     "Didyouknow": "Le savais-tu?",
     "moreDetailedAnalysis": "Si vous désirez une analyse plus détaillée de cette page Web, veuillez contacter vos <a target='_blank' href='https://www.gcpedia.gc.ca/wiki/Institutional_Representatives_for_Analytics?setlang=fr&uselang=fr'>représentants institutionnels en analytique Web</a> (accessible uniquement sur le réseau du gouvernement du Canada).",
-    "Close": "Fermer"
+    "Close": "Fermer",
+    "alert-am-removed-title": "Retrait temporaire des données « Clics des visiteurs »",
+    "alert-am-removed-text": "Nous avons temporairement retiré ces données, car elles ne fournissent pas toujours une représentation exacte des clics. Nous travaillons sur une solution alternative et nous mettrons à jour l'outil d'analyse de page dès qu'une solution sera trouvée." 
 }
