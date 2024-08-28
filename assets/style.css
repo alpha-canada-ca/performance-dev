@@ -167,10 +167,3 @@ background: none;
 border: none;
 padding: 0;  
 }
-
-/* Hide 'What visitor clicked on' table and anchors */
-#np-container, 
-a[href^="#visitor-activity"] + ul, 
-a[href^="#activité-de-visiteur"] + ul  {
-  display:none;
-}
