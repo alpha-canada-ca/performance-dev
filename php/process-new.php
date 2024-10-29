@@ -2,7 +2,7 @@
 session_start();
 //session_unset();
 ini_set('display_errors', 0);
-ini_set('error_reporting', E_ALL & ~E_NOTICE & ~E_WARNING);
+ini_set('error_reporting', E_ALL & ~E_NOTICE & ~E_WARNING & ~E_DEPRECATED & ~E_STRICT);
 function dateRange($first, $last, $step, $format = 'Y-m-d\TH:i:s.v')
 {
     $dates = [];
