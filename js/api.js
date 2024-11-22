@@ -715,7 +715,11 @@ const getPageH1 = (url) => {
   let request = new Request(url, { method: "GET" });
   return fetch(request)
     .then((res) => res.text())
-    .then((res) => $(res).find("h1:first").text())
+    //.then((res) => $(res).find("h1:first").text())
+    .then((res) => {
+      const h1Text = $(res).find("h1:first").text();
+      return h1Text ? h1Text : "";
+    })
     .catch(console.error.bind(console));
   //}
 };
@@ -3194,6 +3198,9 @@ const mainQueue = (url, start, end, lang) => {
     };
     const getTitle = (h2) => {
       if (!$isApp) {
+        if (!h2[0] || !h2[0]["url"]) {
+          return Promise.resolve(); // is this OK? 
+        }
         return Promise.all([getPageH1(h2[0]["url"])]);
       }
       return Promise.resolve($.i18n("Page-levelstatistics"));
