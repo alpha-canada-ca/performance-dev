@@ -157,10 +157,10 @@ button.black:hover {
 
 /* a[href^="#visitor-activity"] + ul, 
 a[href^="#activité-de-visiteur"] + ul,   */
-#np
+/* #np
 {
   display:none;
-}
+} */
 
 .button-nostyle {
 background: none;
