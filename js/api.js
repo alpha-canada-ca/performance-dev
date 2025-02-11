@@ -1462,7 +1462,7 @@ function sortByCol(arr) {
   return arr.sort((a, b) => b.Clicks - a.Clicks);
 }
 
-const jsonAM = (json, day) => {
+const jsonAM = (json, day, url) => {
   var rows = json["rows"][0];
   var val = "#np";
   var $next = $("#np");
@@ -1505,6 +1505,16 @@ const jsonAM = (json, day) => {
   } else {
     $next.html($.i18n("Nodata"));
   }
+  // If page is NON canada.ca: Hide the '#np' table and Show the 'What visitors clicked on data temporarily removed' alert text;
+  if (url.indexOf("canada.ca") !== -1) { //canada.ca page
+    $next.show();
+    $("#np-container .alert").hide();
+  }
+  else { // NON canada.ca page
+    $next.hide();
+    $("#np-container .alert").show();
+  }
+  
 };
 
 const jsonFWYLF = (json, day) => {
@@ -2506,7 +2516,7 @@ const apiCall = (d, i, a, uu, dd, fld, lg, r, e) =>
             case "srchAll":
               return jsonSearchesAll(res, dd);
             case "activityMap":
-              return jsonAM(res, dd);
+              return jsonAM(res, dd, uu);
             case "metrics-new":
               return jsonMetrics(res, dd);
             //case "refType": return jsonRT(res, dd);
