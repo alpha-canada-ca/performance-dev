@@ -1662,6 +1662,7 @@ const jsonMetrics = (json, day) => {
   var otherWebsitesNum = 102 + parseInt(day);
   var socialNetworksNum = 105 + parseInt(day);
   var typedBookmarkedNum = 108 + parseInt(day);
+  var conversationalAiToolsNum = 153 + parseInt(day);
 
   $uv.html("");
   $visit.html("");
@@ -1811,12 +1812,14 @@ const jsonMetrics = (json, day) => {
     otherWebsites = parseInt(rows[otherWebsitesNum]);
     socialNetworks = parseInt(rows[socialNetworksNum]);
     typedBookmarked = parseInt(rows[typedBookmarkedNum]);
+    conversationalAiTools = parseInt(rows[conversationalAiToolsNum]);
 
     let referrerType = [
       ["Search Engines", searchEngine],
       ["Other Web Sites", otherWebsites],
       ["Social Networks", socialNetworks],
       ["Typed / Bookmarked", typedBookmarked],
+      ["Conversational AI Tools", conversationalAiTools],
     ];
 
     jsonRT(referrerType, day);
